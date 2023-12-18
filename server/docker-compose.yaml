@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  app:
+    image: node:21
+    working_dir: /app
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    command: npm run start
