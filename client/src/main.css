@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Manrope";
+  src: url("./assets/fonts/FranklinBold/FranklinExtraCondGothic.ttf") format("truetype");
+  font-display: swap;
+}
+
+@layer base {
+  * { @apply box-border }
+  :root { @apply font-mono text-white bg-black }
+  ::selection { @apply bg-white/20 }
+  #root { @apply relative }
+}
