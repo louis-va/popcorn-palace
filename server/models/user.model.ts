@@ -5,8 +5,6 @@ interface IUser extends Document {
   password: string,
   firstname: string,
   lastname: string,
-  birthdate: Date,
-  gender: "M" | "F" | "X",
   role: "admin" | "user"
 }
 
@@ -15,11 +13,6 @@ const UserSchema = new Schema({
   password: String,
   firstname: String,
   lastname: String,
-  birthdate: Date,
-  gender: {
-    type: String,
-    enum: ["M", "F", "X"]
-  },
   role: String
 });
 

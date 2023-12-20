@@ -19,8 +19,6 @@ async function signUp(req: Request, res: Response) {
       password: bcrypt.hashSync(req.body.password, 8),
       firstname: req.body.firstname,
       lastname: req.body.lastname,
-      birthdate: req.body.birthdate,
-      gender: req.body.gender,
       role: "user"
     });
 
@@ -70,8 +68,6 @@ async function signIn(req: Request, res: Response) {
       email: user.email,
       firstname: user.firstname,
       lastname: user.lastname,
-      birthdate: user.birthdate,
-      gender: user.gender,
       role: user.role
     });
   } catch(err) {
@@ -105,8 +101,6 @@ async function refresh(req: AuthenticatedRequest, res: Response) {
       email: user.email,
       firstname: user.firstname,
       lastname: user.lastname,
-      birthdate: user.birthdate,
-      gender: user.gender,
       role: user.role
     });
   } catch (err) {
