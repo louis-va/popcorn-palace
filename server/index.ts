@@ -4,6 +4,8 @@ import { ConnectOptions } from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import cookieSession from 'cookie-session';
+import helmet from 'helmet';
+import morgan from 'morgan';
 
 // Import routes & models
 import database from './models';
@@ -21,9 +23,12 @@ const COOKIE_SECRET = process.env.COOKIE_SECRET;
 // Initialise express
 const app: Express = express();
 
-/* Allow requests from multiple origins */
+// Enhance API security
+app.use(helmet());
+
+// Allow requests from multiple origins
 const allowedOrigins = {
-  origin: ["http://localhost:3000", "http://192.168.0.248:3000", "http://192.168.100.230:3000", "http://10.40.0.79:3000"]
+  origin: ["http://localhost:3000"]
 };
 app.use(cors(allowedOrigins));
 
@@ -34,7 +39,7 @@ app.use(express.urlencoded({ extended: true }));
 // Stores session data on the client within a cookie
 app.use(
   cookieSession({
-    name: "brm-session",
+    name: "popa-session",
     keys: [COOKIE_SECRET!],
     httpOnly: true
   })
@@ -48,6 +53,9 @@ app.use(function(req: Request, res: Response, next: NextFunction) {
   );
   next();
 });
+
+// Log HTTP requests
+app.use(morgan('combined'));
 
 // Connection to the database
 database.mongoose
