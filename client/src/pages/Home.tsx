@@ -1,12 +1,13 @@
 import Container from "../assets/components/Container"
 import Nav from "../assets/components/Nav"
+import Hero from "../assets/components/Hero"
 
 const Home = () => {
   return (
     <>
       <Container>
         <Nav />
-        <h1>Home</h1>
+        <Hero />
       </Container>
     </>
   )
