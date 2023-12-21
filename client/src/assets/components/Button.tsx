@@ -1,12 +1,14 @@
+import { ReactNode } from 'react';
+
 interface ButtonProps {
-  type: "primary" | "secondary" | "tertiary"
-  size: "small" | "medium" | "round"
-  label: string;
+  type: "primary" | "secondary" | "tertiary";
+  size: "small" | "medium" | "round";
   onClick: () => void;
+  children: ReactNode;
   className?: string;
 }
 
-const Button = ({type, size, label, onClick, className }: ButtonProps) => {
+const Button = ({type, size, onClick, children, className }: ButtonProps) => {
   let typeClasses, sizeClasses: string;
   
   switch (type) {
@@ -36,7 +38,7 @@ const Button = ({type, size, label, onClick, className }: ButtonProps) => {
   return (
     <div>
       <button onClick={onClick} className={`font-bold rounded-full active:scale-[.97] ${className} ${typeClasses} ${sizeClasses}`}>
-        {label}
+        {children}
       </button>
     </div>
   );
