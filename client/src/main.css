@@ -4,12 +4,12 @@
 
 @font-face {
   font-family: "Manrope";
-  src: url("./assets/fonts/FranklinBold/FranklinExtraCondGothic.ttf") format("truetype");
+  src: url("./assets/fonts/Manrope.ttf") format("truetype");
   font-display: swap;
 }
 
 @layer base {
-  * { @apply box-border }
+  * { @apply box-border focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2 focus-visible:outline-dashed }
   :root { @apply font-mono text-white bg-black }
   ::selection { @apply bg-white/20 }
   #root { @apply relative }
