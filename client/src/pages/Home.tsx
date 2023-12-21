@@ -1,6 +1,6 @@
-import Container from "../assets/components/Container"
-import Nav from "../assets/components/Nav"
-import Hero from "../assets/components/Hero"
+import Container from "../assets/components/layouts/Container"
+import Nav from "../assets/components/sections/Nav"
+import Hero from "../assets/components/sections/Hero"
 
 const Home = () => {
   return (
