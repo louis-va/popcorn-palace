@@ -57,7 +57,7 @@ async function signIn(req: Request, res: Response) {
       {
         algorithm: 'HS256',
         allowInsecureKeySizes: true,
-        expiresIn: 86400, // 24 hours
+        expiresIn: 2592000, // 30 days
       }
     );
 
