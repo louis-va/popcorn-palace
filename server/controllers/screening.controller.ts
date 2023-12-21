@@ -53,6 +53,7 @@ async function addScreening(req: Request, res: Response) {
 async function getAllScreenings(req: Request, res: Response) {
   try {
     const screenings = await Screening.find()
+      .select('movie.title movie.poster date _id')
 
     res.status(200).send(screenings);
   } catch (err: any) {
