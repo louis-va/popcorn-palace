@@ -14,8 +14,8 @@ const Nav = () => {
         </svg>
       </a>
       <div className="flex gap-2">
-        <Button type="primary" size="small" onClick={()=>{console.log("signup")}}> S'inscrire </Button>
         <Button type="secondary" size="small" onClick={()=>{console.log("signin")}}> Se connecter </Button>
+        <Button type="primary" size="small" onClick={()=>{console.log("signup")}}> S'inscrire </Button>
       </div>
     </nav>
   )

@@ -11,31 +11,31 @@ interface ButtonProps {
 const Button = ({type, size, onClick, children, className }: ButtonProps) => {  
   switch (type) {
     case "primary":
-      className += "bg-white text-black hover:bg-white/85"
+      className += " font-bold bg-white text-black hover:bg-white/85"
       break;
     case "secondary":
-      className += "bg-white/10 text-white border border-white/10 hover:bg-white/15 hover:border-white/15"
+      className += " font-semibold bg-white/15 text-white hover:bg-white/20"
       break;
     case "tertiary":
-      className += "bg-orange text-black hover:bg-orange/90"
+      className += " font-bold bg-orange text-black hover:bg-orange/90"
       break;
   }
 
   switch (size) {
     case "small":
-      className += "text-sm px-4 py-2"
+      className += " text-sm px-3 py-1" 
       break;
     case "medium":
-      className += "text-base px-8 py-4"
+      className += " text-base px-8 py-4"
       break;
     case "round":
-      className += "text-lg w-8 h-8 flex justify-center items-center"
+      className += " text-lg w-8 h-8 flex justify-center items-center"
       break;
   }
 
   return (
     <div>
-      <button onClick={onClick} className={`font-bold rounded-full active:scale-[.97] ${className}`}>
+      <button onClick={onClick} className={`rounded-full active:scale-[.97] ${className}`}>
         {children}
       </button>
     </div>
