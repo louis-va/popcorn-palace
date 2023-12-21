@@ -10,8 +10,8 @@ lerna-debug.log*
 # Local
 node_modules
 package-lock.json
-dist
 dist-ssr
+dist
 *.local
 **/*.env
 pnpm-lock.yaml
