@@ -3,7 +3,7 @@ import Button from "../ui/Button"
 const Nav = () => {
   return (
     <nav className="flex justify-between items-center h-20 sm:px-2">
-      <a href="/" className="rounded-sm hover:text-orange active:scale-[.96]">
+      <a href="/" className="rounded-sm hover:text-orange">
         <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M23.7343 18.48C23.2489 18.8053 22.6409 18.9627 21.9102 18.952C21.1796 18.9413 20.5716 18.7733 20.0863 18.448C19.6009 18.1227 19.2356 17.6667 18.9902 17.08C18.7503 16.4933 18.6302 15.8 18.6302 15C18.6302 14.2 18.7503 13.5013 18.9902 12.904C19.2356 12.3067 19.6009 11.8453 20.0863 11.52C20.5716 11.1947 21.1796 11.0373 21.9102 11.048C22.6409 11.0587 23.2489 11.2267 23.7343 11.552C24.2196 11.8773 24.5823 12.3333 24.8223 12.92C25.0676 13.5067 25.1902 14.2 25.1902 15C25.1902 15.8 25.0676 16.4987 24.8223 17.096C24.5823 17.6933 24.2196 18.1547 23.7343 18.48Z" fill="currentColor"/>
           <path d="M8.768 14.824H6.176V11.272H8.768C8.88 11.272 9.00267 11.2773 9.136 11.288C9.26933 11.2987 9.392 11.32 9.504 11.352C9.79733 11.432 10.024 11.568 10.184 11.76C10.344 11.9467 10.4533 12.1573 10.512 12.392C10.576 12.6213 10.608 12.84 10.608 13.048C10.608 13.256 10.576 13.4773 10.512 13.712C10.4533 13.9413 10.344 14.152 10.184 14.344C10.024 14.5307 9.79733 14.664 9.504 14.744C9.392 14.776 9.26933 14.7973 9.136 14.808C9.00267 14.8187 8.88 14.824 8.768 14.824Z" fill="currentColor"/>
@@ -13,10 +13,7 @@ const Nav = () => {
           <path d="M22.88 31.328L21.3216 26.2791L19.787 31.328H22.88Z" fill="currentColor"/>
         </svg>
       </a>
-      <div className="flex gap-2">
-        <Button type="secondary" size="small" onClick={()=>{console.log("signin")}}> Se connecter </Button>
-        <Button type="primary" size="small" onClick={()=>{console.log("signup")}}> S'inscrire </Button>
-      </div>
+      <Button type="secondary" size="small" onClick={()=>{console.log("signin")}}> Mon compte </Button>
     </nav>
   )
 }

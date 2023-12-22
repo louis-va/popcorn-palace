@@ -8,7 +8,7 @@ interface ButtonProps {
   className?: string;
 }
 
-const Button = ({type, size, onClick, children, className }: ButtonProps) => {  
+const Button = ({ type, size, onClick, children, className }: ButtonProps) => {  
   switch (type) {
     case "primary":
       className += " font-bold bg-white text-black hover:bg-white/85"
@@ -23,7 +23,7 @@ const Button = ({type, size, onClick, children, className }: ButtonProps) => {
 
   switch (size) {
     case "small":
-      className += " text-sm px-3 py-1" 
+      className += " text-sm px-4 py-2"
       break;
     case "medium":
       className += " text-base px-8 py-4"
@@ -35,7 +35,7 @@ const Button = ({type, size, onClick, children, className }: ButtonProps) => {
 
   return (
     <div>
-      <button onClick={onClick} className={`rounded-full active:scale-[.97] ${className}`}>
+      <button onClick={onClick} className={`rounded-full ${className}`}>
         {children}
       </button>
     </div>

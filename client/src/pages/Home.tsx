@@ -1,6 +1,7 @@
-import Container from "../assets/components/layouts/Container"
-import Nav from "../assets/components/sections/Nav"
-import Hero from "../assets/components/sections/Hero"
+import Container from "../components/layouts/Container"
+import Nav from "../components/sections/Nav"
+import Hero from "../components/sections/Hero"
+import Screenings from "../components/sections/Screenings"
 
 const Home = () => {
   return (
@@ -8,6 +9,7 @@ const Home = () => {
       <Container>
         <Nav />
         <Hero />
+        <Screenings />
       </Container>
     </>
   )

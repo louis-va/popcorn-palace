@@ -3,17 +3,18 @@ import { ReactNode } from 'react';
 interface CardProps {
   size?: "small";
   color?: "blue" | "pink" | "yellow" | "orange";
+  clickable?: boolean;
   children: ReactNode;
   className?: string;
 }
 
-const Card = ({ size, color, children, className }: CardProps) => {
+const Card = ({ size, color, clickable, children, className }: CardProps) => {
   switch (size) {
     case "small":
-      className += " rounded p-2 sm:p-3"
+      className += " p-2 sm:p-3"
       break;
     default:
-      className += " rounded-lg p-4 sm:p-6"
+      className += " p-4 sm:p-6"
       break;
   }
 
@@ -32,11 +33,12 @@ const Card = ({ size, color, children, className }: CardProps) => {
       break;
     default:
       className += " bg-white/5 border-white/5"
+      if (clickable) className += " hover:bg-white/10 hover:border-white/10"
       break;
   }
 
   return (
-    <div className={`w-full border ${className}`}>
+    <div className={`w-full rounded-lg border ${className}`}>
       {children}
     </div>
   );
