@@ -1,6 +1,6 @@
-import Card from "../ui/Card"
-import Typography from "../ui/Typography"
-import Icon from "../ui/Icon"
+import Card from "../common/Card"
+import Typography from "../common/Typography"
+import Icon from "../common/Icon"
 import heroImage from "../../assets/images/hero-image.webp"
 
 const Hero = () => {

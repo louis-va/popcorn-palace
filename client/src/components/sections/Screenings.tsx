@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
-import Typography from "../ui/Typography"
-import ScreeningCard from "../ui/ScreeningCard"
+import Typography from "../common/Typography"
+import ScreeningCard from "../ui-elements/ScreeningCard"
 
 interface Screening {
   movie: {
