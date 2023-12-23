@@ -18,7 +18,7 @@ const Screenings = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const getScreenings = async () => {
       try {
         const response = await fetch(
           `${import.meta.env.VITE_API_URL}/screenings`, 
@@ -38,7 +38,7 @@ const Screenings = () => {
       }
     };
 
-    fetchData();
+    getScreenings();
   }, []);
 
   if (loading) {

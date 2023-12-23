@@ -2,18 +2,18 @@ import { useState } from 'react';
 import { useAuth } from "../../utils/useAuth";
 import Logo from "../common/Logo";
 import Button from "../common/Button"
-import Login from "../ui-elements/Login";
+import Login from "../ui-elements/LoginModal";
 
 const Nav = () => {
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, userData } = useAuth();
   const [isLoginOpen, setIsLoginOpen] = useState(false);
 
   let accountBtn: JSX.Element;
 
   if (isLoggedIn) {
-    accountBtn = <Button type="tertiary" size="small" onClick={()=>{console.log("account")}}><span className="inline-block w-2 h-2 mr-2 rounded-full bg-orange"></span> Louis Van Aken </Button>
+    accountBtn = <Button variant="tertiary" size="small" onClick={()=>{console.log("account")}}><span className="inline-block w-2 h-2 mr-2 rounded-full bg-orange"></span> {userData?.firstname} </Button>
   } else {
-    accountBtn = <Button type="tertiary" size="small" onClick={()=>{setIsLoginOpen(true)}}> Connexion </Button>
+    accountBtn = <Button variant="tertiary" size="small" onClick={()=>{setIsLoginOpen(true)}}> Connexion </Button>
   }
 
   return (

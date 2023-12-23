@@ -25,10 +25,10 @@ const Modal = ({ isOpen, setIsOpen, children }: ModalProps) => {
   document.body.style.overflow = 'hidden';
 
   return (
-    <div onClick={handleCloseModal} className='fixed top-0 left-0 flex justify-center items-center z-40 w-screen h-screen bg-black/80 backdrop-blur-xl'>
+    <div onClick={handleCloseModal} className='fixed p-4 top-0 left-0 flex justify-center items-center z-40 w-screen h-screen bg-black/80 backdrop-blur-xl'>
       <Card className='relative z-50 max-w-md'>
         <Button 
-          type='tertiary'
+          variant='tertiary'
           size='round'
           onClick={() => {setIsOpen(false)}}
           className='absolute top-2 right-2'

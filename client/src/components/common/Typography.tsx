@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 interface TypographyProps {
   tag: keyof JSX.IntrinsicElements;
-  variant: "h1" | "h2" | "h3" | "h4" | "h5" | "p" | "small";
+  variant: "h1" | "h2" | "h3" | "h4" | "h5" | "p" | "small" | "label";
   children: ReactNode;
   className?: string;
 }
@@ -32,10 +32,13 @@ const Typography = ({ tag, variant, children, className }: TypographyProps) => {
     case "small":
       className += " text-xs font-normal leading-normal"
       break;
+    case "label":
+      className += " text-sm font-medium leading-none"
+      break;
   }
 
   return (
-    <Tag className={`${className} text-`}>
+    <Tag className={`${className}`}>
       {children}
     </Tag>
   );
