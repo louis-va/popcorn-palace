@@ -27,10 +27,10 @@ const app: Express = express();
 app.use(helmet());
 
 // Allow requests from multiple origins
-const allowedOrigins = {
-  origin: ["http://localhost:3000"]
-};
-app.use(cors(allowedOrigins));
+app.use(cors({
+  origin: "http://localhost:3000",
+  credentials: true,
+}));
 
 // Parse incoming requests
 app.use(express.json());
@@ -39,9 +39,12 @@ app.use(express.urlencoded({ extended: true }));
 // Stores session data on the client within a cookie
 app.use(
   cookieSession({
-    name: "popa-session",
+    name: "session",
     keys: [COOKIE_SECRET!],
-    httpOnly: true
+    httpOnly: true,
+    sameSite: "strict",
+    secure: false,
+    maxAge: 30 * 24 * 60 * 60 * 1000 // 30 days
   })
 );
 
