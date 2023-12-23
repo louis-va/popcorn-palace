@@ -28,7 +28,6 @@ const Login = ({ isOpen, setIsOpen }: LoginProps) => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    console.table(formData);
     const loginSuccessful = await handleLogin(formData);
     if (loginSuccessful) {
       setIsOpen(false)

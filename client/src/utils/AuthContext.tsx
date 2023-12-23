@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 
 interface LoginData {
   email: string;
@@ -31,6 +31,29 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState<UserData>();
 
+  useEffect(() => {
+    const refresh = async () => {
+      try {  
+        const options = {
+          method: "POST",
+          credentials: 'include' as RequestCredentials
+        }
+        
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/refresh`, options)
+  
+        if (!response.ok) return null;
+  
+        const user: UserData = await response.json();
+        setUserData(user);
+        setIsLoggedIn(true);
+      } catch (error: any) {
+        console.error(error.message || 'An error occurred');
+      }
+    };
+
+    refresh();
+  }, []);
+
   const handleLogin = async (data: LoginData) => {
     try {
       const headers = new Headers();
@@ -44,7 +67,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
       const options = {
         method: "POST",
-        credentials: "same-origin" as RequestCredentials,
+        credentials: 'include' as RequestCredentials,
         headers: headers,
         body: payload
       }

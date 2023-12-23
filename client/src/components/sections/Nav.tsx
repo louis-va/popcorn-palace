@@ -11,7 +11,12 @@ const Nav = () => {
   let accountBtn: JSX.Element;
 
   if (isLoggedIn) {
-    accountBtn = <Button variant="tertiary" size="small" onClick={()=>{console.log("account")}}><span className="inline-block w-2 h-2 mr-2 rounded-full bg-orange"></span> {userData?.firstname} </Button>
+    accountBtn = (
+      <Button variant="tertiary" size="small" onClick={()=>{console.log("account")}}>
+        <span className="inline-block w-2 h-2 mr-2 rounded-full bg-orange"></span> 
+        {`${userData?.firstname} ${userData?.lastname}`} 
+      </Button>
+    )
   } else {
     accountBtn = <Button variant="tertiary" size="small" onClick={()=>{setIsLoginOpen(true)}}> Connexion </Button>
   }
@@ -26,7 +31,6 @@ const Nav = () => {
         {accountBtn}
       </nav>
     </>
-    
   )
 }
 
