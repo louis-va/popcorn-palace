@@ -8,7 +8,7 @@ interface CardProps {
   className?: string;
 }
 
-const Card = ({ size, color, clickable, children, className }: CardProps) => {
+const Card = ({ size, color, clickable, children, className='' }: CardProps) => {
   switch (size) {
     case "small":
       className += " p-2 sm:p-3"

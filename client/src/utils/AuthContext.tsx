@@ -15,7 +15,7 @@ interface UserData {
 }
 
 interface AuthContext {
-  isLoggedIn: boolean;
+  isLoggedIn: boolean | null;
   userData: UserData | undefined;
   handleLogin: (data: LoginData) => Promise<boolean>;
   handleLogout: () => void;
@@ -28,7 +28,7 @@ interface AuthProviderProps {
 const AuthContext = createContext<AuthContext | undefined>(undefined);
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
   const [userData, setUserData] = useState<UserData>();
 
   useEffect(() => {
@@ -47,7 +47,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         setUserData(user);
         setIsLoggedIn(true);
       } catch (error: any) {
-        console.error(error.message || 'An error occurred');
+        setIsLoggedIn(false);
       }
     };
 
@@ -71,6 +71,9 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         headers: headers,
         body: payload
       }
+
+      // Simulating a delay of 2 seconds
+      await new Promise(resolve => setTimeout(resolve, 2000));
       
       const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/signin`, options)
 
@@ -81,7 +84,6 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
       setIsLoggedIn(true);
       return true;
     } catch (error: any) {
-      console.error(error.message || 'An error occurred');
       return false;
     }
   };

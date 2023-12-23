@@ -14,6 +14,7 @@ interface LoginProps {
 const Login = ({ isOpen, setIsOpen }: LoginProps) => {
   const { handleLogin } = useAuth();
 
+  const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -28,7 +29,9 @@ const Login = ({ isOpen, setIsOpen }: LoginProps) => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
     const loginSuccessful = await handleLogin(formData);
+    setIsLoading(false);
     if (loginSuccessful) {
       setIsOpen(false)
     }
@@ -56,7 +59,7 @@ const Login = ({ isOpen, setIsOpen }: LoginProps) => {
           name="remember"
           onChange={handleInputChange}
         />
-        <Button type="submit" variant="primary" className="w-full mt-8">Se connecter</Button>
+        <Button type="submit" variant="primary" loading={isLoading} className="w-full mt-8">Se connecter</Button>
         <Typography tag="p" variant="small" className="text-white/60 text-center mt-1">
           Vous n’avez pas de compte ? <button className="underline text-orange">S’inscrire</button>
         </Typography>

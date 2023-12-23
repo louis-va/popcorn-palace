@@ -7,7 +7,7 @@ interface TypographyProps {
   className?: string;
 }
 
-const Typography = ({ tag, variant, children, className }: TypographyProps) => {
+const Typography = ({ tag, variant, children, className='' }: TypographyProps) => {
   const Tag = tag
 
   switch (variant) {

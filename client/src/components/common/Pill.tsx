@@ -6,7 +6,7 @@ interface PillProps {
   className?: string;
 }
 
-const Pill = ({ type, children, className }: PillProps) => {  
+const Pill = ({ type, children, className='' }: PillProps) => {  
   switch (type) {
     case "dark":
       className += " bg-black"
