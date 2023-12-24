@@ -61,7 +61,7 @@ const Login = ({ isOpen, setIsOpen }: LoginProps) => {
           onChange={handleInputChange}
         />
         <Button type="submit" variant="primary" loading={isLoading} className="w-full mt-8 mb-2">Se connecter</Button>
-        <Typography as="p" variant="small" className="text-center">
+        <Typography as="p" variant="small" className="text-center text-white-muted">
           Vous n’avez pas de compte ? <Link type='button' onClick={()=>{console.log('signup')}}>S’inscrire</Link>
         </Typography>
       </form>

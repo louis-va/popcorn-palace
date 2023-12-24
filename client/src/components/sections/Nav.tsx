@@ -13,7 +13,7 @@ const Nav = () => {
   if (isLoggedIn) {
     accountBtn = (
       <Button variant="tertiary" size="small" onClick={()=>{console.log("account")}}>
-        <span className="inline-block w-2 h-2 mr-2 rounded-full bg-orange"></span> 
+        <span className="inline-block w-3 h-3 mr-2 rounded-full bg-orange"></span> 
         {`${userData?.firstname} ${userData?.lastname}`} 
       </Button>
     )
@@ -25,7 +25,7 @@ const Nav = () => {
     <>
       <Login isOpen={isLoginOpen} setIsOpen={setIsLoginOpen} />
       <nav className="flex justify-between items-center h-20 sm:px-2">
-        <a href="/" className="rounded-sm hover:text-orange">
+        <a href="/" className="rounded text-orange hover:text-orange-dark">
           <Logo/>
         </a>
         {accountBtn}

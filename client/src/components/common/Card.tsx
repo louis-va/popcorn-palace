@@ -3,12 +3,11 @@ import { ReactNode } from 'react';
 interface CardProps {
   size?: "small";
   color?: "blue" | "pink" | "yellow" | "orange";
-  clickable?: boolean;
   children: ReactNode;
   className?: string;
 }
 
-const Card = ({ size, color, clickable, children, className='' }: CardProps) => {
+const Card = ({ size, color, children, className='' }: CardProps) => {
   switch (size) {
     case "small":
       className += " p-2 sm:p-3"
@@ -20,20 +19,19 @@ const Card = ({ size, color, clickable, children, className='' }: CardProps) => 
 
   switch (color) {
     case "blue":
-      className += " bg-blueLight/5 border-blueLight/5 text-blueLight"
+      className += " bg-[#B2E3FF]/10 border-[#B2E3FF]/5 text-[#B2E3FF]"
       break;
     case "pink":
-      className += " bg-pinkLight/5 border-pinkLight/5 text-pinkLight"
+      className += " bg-[#FDB2FF]/10 border-[#FDB2FF]/5 text-[#FDB2FF]"
       break;
     case "yellow":
-      className += " bg-yellowLight/5 border-yellowLight/5 text-yellowLight"
+      className += " bg-[#FFE9B2]/10 border-[#FFE9B2]/5 text-[#FFE9B2]"
       break;
     case "orange":
-      className += " bg-orangeLight/5 border-orangeLight/5 text-orangeLight"
+      className += " bg-[#FFC0B2]/10 border-[#FFC0B2]/5 text-[#FFC0B2]"
       break;
     default:
       className += " bg-white/5 border-white/5"
-      if (clickable) className += " hover:bg-white/10 hover:border-white/10"
       break;
   }
 

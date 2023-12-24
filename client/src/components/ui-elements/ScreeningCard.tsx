@@ -13,8 +13,8 @@ interface ScreeningCardProps {
 
 const ScreeningCard = ({ id, title, poster, date, className }: ScreeningCardProps) => {
   return (
-    <a href={`/screenings/${id}`} className={`${className} rounded`}>
-      <Card size="small" clickable={true} className="flex flex-col justify-between h-full">
+    <a href={`/screenings/${id}`} className={`${className} rounded-lg`}>
+      <Card size="small" className="flex flex-col justify-between h-full hover:bg-white/10 hover:border-white/10">
         <img 
           className="w-full rounded"
           src={poster}

@@ -10,7 +10,7 @@ type LinkProps = {
 
 const Link = ({ type='link', href, onClick, className, children }: LinkProps) => {
   
-  className += ' inline font-bold text-orange hover:underline'
+  className += ' inline font-bold text-orange hover:text-orange-dark'
 
   if (type === 'link') {
     return (
