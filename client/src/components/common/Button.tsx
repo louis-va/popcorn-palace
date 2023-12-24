@@ -2,9 +2,9 @@ import { ReactNode } from 'react';
 import Icon from './Icon';
 
 interface ButtonProps {
-  type?: "submit" | "reset" | "button" | undefined;
+  type?: "submit" | "reset" | "button";
   variant: "primary" | "secondary" | "tertiary";
-  size?: "small" | "round" | undefined;
+  size?: "small" | "round";
   disabled?: boolean;
   loading?: boolean;
   onClick?: () => void;
@@ -12,19 +12,19 @@ interface ButtonProps {
   className?: string;
 }
 
-const Button = ({ type, variant, size, disabled, loading, onClick, children, className='' }: ButtonProps) => {  
+const Button = ({ type="button", variant, size, disabled, loading, onClick, children, className='' }: ButtonProps) => {  
 
   const isDisabled = loading || disabled;
 
   switch (variant) {
     case "primary":
-      className += ` font-bold bg-orange text-black hover:bg-orange/90 ${disabled ? 'bg-orange/50 hover:bg-orange/50' : ''}`;
+      className += ` font-bold text-black ${isDisabled ? 'bg-orange/50 hover:bg-orange/50' : 'bg-orange hover:bg-orange/90'}`;
       break;
     case "secondary":
-      className += ` font-bold bg-white text-black hover:bg-white/85 ${disabled ? 'bg-white/50 hover:bg-white/50' : ''}`;
+      className += ` font-bold text-black ${isDisabled ? 'bg-white/50 hover:bg-white/50' : 'bg-white hover:bg-white/85'}`;
       break;
     case "tertiary":
-      className += ` font-semibold bg-white/15 text-white hover:bg-white/20 ${disabled ? 'bg-white/10 text-white/50 hover:bg-white/10 hover:text-white/50' : ''}`;
+      className += ` font-semibold ${isDisabled ? 'bg-white/10 text-white/50 hover:bg-white/10 hover:text-white/50' : 'bg-white/15 text-white hover:bg-white/20'}`;
       break;
   }
   

@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { useAuth } from "../../utils/useAuth";
+import { useAuth } from "../auth/useAuth";
 import Logo from "../common/Logo";
 import Button from "../common/Button"
-import Login from "../ui-elements/LoginModal";
+import Login from "../auth/LoginModal";
 
 const Nav = () => {
   const { isLoggedIn, userData } = useAuth();

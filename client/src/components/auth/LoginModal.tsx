@@ -1,10 +1,11 @@
 import { useState, ChangeEvent, FormEvent } from "react";
-import { useAuth } from "../../utils/useAuth";
+import { useAuth } from "./useAuth";
 import Modal from "../common/Modal";
 import Typography from "../common/Typography";
 import Input from "../common/Input";
 import Checkbox from "../common/Checkbox";
 import Button from "../common/Button";
+import Link from "../common/Link";
 
 interface LoginProps {
   isOpen: boolean;
@@ -39,7 +40,7 @@ const Login = ({ isOpen, setIsOpen }: LoginProps) => {
 
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
-      <Typography tag="h2" variant="h2" className="pr-8">Connectez-vous à votre compte</Typography>
+      <Typography as="h2" variant="h2" className="pr-8">Connectez-vous à votre compte</Typography>
       
       <form onSubmit={handleSubmit}>
         <Input 
@@ -59,9 +60,9 @@ const Login = ({ isOpen, setIsOpen }: LoginProps) => {
           name="remember"
           onChange={handleInputChange}
         />
-        <Button type="submit" variant="primary" loading={isLoading} className="w-full mt-8">Se connecter</Button>
-        <Typography tag="p" variant="small" className="text-white/60 text-center mt-1">
-          Vous n’avez pas de compte ? <button className="underline text-orange">S’inscrire</button>
+        <Button type="submit" variant="primary" loading={isLoading} className="w-full mt-8 mb-2">Se connecter</Button>
+        <Typography as="p" variant="small" className="text-center">
+          Vous n’avez pas de compte ? <Link type='button' onClick={()=>{console.log('signup')}}>S’inscrire</Link>
         </Typography>
       </form>
     </Modal>

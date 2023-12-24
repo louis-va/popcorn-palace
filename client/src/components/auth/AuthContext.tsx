@@ -72,7 +72,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         body: payload
       }
 
-      // Simulating a delay of 2 seconds
+      // Simulating a 2 seconds delay
       await new Promise(resolve => setTimeout(resolve, 2000));
       
       const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/signin`, options)

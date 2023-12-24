@@ -51,7 +51,7 @@ const Screenings = () => {
 
   return (
     <section className="mt-12">
-      <Typography tag="h2" variant="h2">Nos prochaines projections</Typography>
+      <Typography as="h2" variant="h2">Nos prochaines projections</Typography>
       <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {screeningsData!.map((screening, index) => (
           <ScreeningCard

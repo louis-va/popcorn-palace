@@ -21,9 +21,9 @@ const ScreeningCard = ({ id, title, poster, date, className }: ScreeningCardProp
           alt={`Affiche du film ${title}`}
         />
         <Typography 
-          className="text-center mt-4"
-          tag="h3" 
+          as="h3" 
           variant="h5"
+          className="text-center mt-4"
         >
             {title}
         </Typography>

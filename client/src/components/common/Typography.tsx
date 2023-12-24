@@ -1,14 +1,14 @@
 import { ReactNode } from 'react';
 
 interface TypographyProps {
-  tag: keyof JSX.IntrinsicElements;
+  as: keyof JSX.IntrinsicElements;
   variant: "h1" | "h2" | "h3" | "h4" | "h5" | "p" | "small" | "label";
   children: ReactNode;
   className?: string;
 }
 
-const Typography = ({ tag, variant, children, className='' }: TypographyProps) => {
-  const Tag = tag
+const Typography = ({ as, variant, children, className='' }: TypographyProps) => {
+  const Tag = as
 
   switch (variant) {
     case "h1":
