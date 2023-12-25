@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, FormEvent } from "react";
+import { useState, useEffect, ChangeEvent, FormEvent } from "react";
 import { useAuth } from "./useAuth";
 import Modal from "../common/Modal";
 import Typography from "../common/Typography";
@@ -16,11 +16,18 @@ const Login = ({ isOpen, setIsOpen }: LoginProps) => {
   const { handleLogin } = useAuth();
 
   const [isLoading, setIsLoading] = useState(false)
+  const [loginError, setLoginError] = useState<string | null>(null)
   const [formData, setFormData] = useState({
     email: '',
     password: '',
     remember: false
   });
+
+  useEffect(() => {
+    if (!isOpen) {
+      setLoginError(null);
+    }
+  }, [isOpen]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
@@ -35,6 +42,9 @@ const Login = ({ isOpen, setIsOpen }: LoginProps) => {
     setIsLoading(false);
     if (loginSuccessful) {
       setIsOpen(false)
+      setLoginError(null)
+    } else {
+      setLoginError("Email ou mot de passe incorrect")
     }
   };
 
@@ -44,15 +54,17 @@ const Login = ({ isOpen, setIsOpen }: LoginProps) => {
       
       <form onSubmit={handleSubmit}>
         <Input 
-          label="Email" 
-          type="email" 
-          name="email" 
+          label="Email"
+          type="email"
+          name="email"
+          error={loginError}
           onChange={handleInputChange}
         />
         <Input 
-          label="Password" 
-          type="password" 
-          name="password" 
+          label="Password"
+          type="password"
+          name="password"
+          error={loginError}
           onChange={handleInputChange}
         />
         <Checkbox

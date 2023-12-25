@@ -17,8 +17,10 @@ const Nav = () => {
         {`${userData?.firstname} ${userData?.lastname}`} 
       </Button>
     )
-  } else {
+  } else if ((isLoggedIn===false)) {
     accountBtn = <Button variant="tertiary" size="small" onClick={()=>{setIsLoginOpen(true)}}> Connexion </Button>
+  } else {
+    accountBtn = <></>
   }
 
   return (

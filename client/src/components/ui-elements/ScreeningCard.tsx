@@ -11,7 +11,7 @@ interface ScreeningCardProps {
   className?: string;
 }
 
-const ScreeningCard = ({ id, title, poster, date, className }: ScreeningCardProps) => {
+const ScreeningCard = ({ id, title, poster, date, className='' }: ScreeningCardProps) => {
   return (
     <a href={`/screenings/${id}`} className={`${className} rounded-lg`}>
       <Card size="small" className="flex flex-col justify-between h-full hover:bg-white/10 hover:border-white/10">

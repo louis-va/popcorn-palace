@@ -9,7 +9,7 @@
 }
 
 @layer base {
-  * { @apply box-border focus-visible:outline-0 focus-visible:ring focus-visible:ring-orange/50 }
+  * { @apply box-border focus-visible:outline-0 focus-visible:ring focus-visible:ring-orange/40 }
   :root { @apply font-mono text-white bg-black }
   ::selection { @apply bg-white/20 }
   #root { @apply relative }

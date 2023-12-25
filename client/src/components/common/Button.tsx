@@ -18,10 +18,10 @@ const Button = ({ type="button", variant, size, disabled, loading, onClick, chil
 
   switch (variant) {
     case "primary":
-      className += ` font-bold text-black ${isDisabled ? 'bg-orange/50 hover:bg-orange/50' : 'bg-orange hover:bg-orange-dark'}`;
+      className += ` font-semibold text-black ${isDisabled ? 'bg-orange/50 hover:bg-orange/50' : 'bg-orange hover:bg-orange-dark'}`;
       break;
     case "secondary":
-      className += ` font-bold text-black ${isDisabled ? 'bg-white/50 hover:bg-white/50' : 'bg-white hover:bg-white/85'}`;
+      className += ` font-semibold text-black ${isDisabled ? 'bg-white/50 hover:bg-white/50' : 'bg-white hover:bg-white/85'}`;
       break;
     case "tertiary":
       className += ` font-semibold ${isDisabled ? 'bg-white/10 text-white/50 hover:bg-white/10 hover:text-white/50' : 'bg-white/10 text-white hover:bg-white/15'}`;

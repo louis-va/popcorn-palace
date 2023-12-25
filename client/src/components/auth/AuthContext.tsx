@@ -38,11 +38,11 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
           method: "POST",
           credentials: 'include' as RequestCredentials
         }
-        
         const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/refresh`, options)
-  
-        if (!response.ok) return null;
-  
+        if (!response.ok) {
+          setIsLoggedIn(false);
+          return null;
+        }
         const user: UserData = await response.json();
         setUserData(user);
         setIsLoggedIn(true);

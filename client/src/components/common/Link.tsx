@@ -8,9 +8,9 @@ type LinkProps = {
   children: ReactNode;
 };
 
-const Link = ({ type='link', href, onClick, className, children }: LinkProps) => {
+const Link = ({ type='link', href, onClick, className='', children }: LinkProps) => {
   
-  className += ' inline font-bold text-orange hover:text-orange-dark'
+  className += ' inline font-semibold text-orange hover:text-orange-dark'
 
   if (type === 'link') {
     return (
