@@ -29,5 +29,6 @@ export interface IScreening {
     poster: string;
   },
   _id: string;
+  slug: string;
   date: Date;
 }

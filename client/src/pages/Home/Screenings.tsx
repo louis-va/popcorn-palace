@@ -7,16 +7,16 @@ import { fetchScreenings } from '@/services/screening/fetchScreenings.service';
 import { formatDateToDDMM, formatTimeToHHMM } from "@/utils/date.helpers";
 
 interface ScreeningCardProps {
-  id: string;
+  slug: string;
   title: string;
   poster: string;
   date: Date;
   className?: string;
 }
 
-const ScreeningCard = ({ id, title, poster, date, className='' }: ScreeningCardProps) => {
+const ScreeningCard = ({ slug, title, poster, date, className='' }: ScreeningCardProps) => {
   return (
-    <a href={`/screenings/${id}`} className={`${className} rounded-lg`}>
+    <a href={`/screenings/${slug}`} className={`${className} rounded-lg`}>
       <Card size="small" className="flex flex-col justify-between h-full hover:bg-white/10 hover:border-white/10">
         <img 
           className="w-full rounded"
@@ -71,7 +71,7 @@ const Screenings = () => {
           {screeningsData?.map((screening) => (
             <ScreeningCard
               key={screening._id}
-              id={screening._id}
+              slug={screening.slug}
               title={screening.movie.title}
               poster={screening.movie.poster}
               date={screening.date}
