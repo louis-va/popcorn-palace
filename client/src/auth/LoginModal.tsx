@@ -1,19 +1,14 @@
 import { useState, useEffect, ChangeEvent, FormEvent } from "react";
 import { useAuth } from "./useAuth";
-import Modal from "../common/Modal";
-import Typography from "../common/Typography";
-import Input from "../common/Input";
-import Checkbox from "../common/Checkbox";
-import Button from "../common/Button";
-import Link from "../common/Link";
+import Modal from "../components/common/Modal";
+import Typography from "../components/common/Typography";
+import Input from "../components/common/Input";
+import Checkbox from "../components/common/Checkbox";
+import Button from "../components/common/Button";
+import Link from "../components/common/Link";
 
-interface LoginProps {
-  isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const Login = ({ isOpen, setIsOpen }: LoginProps) => {
-  const { handleLogin } = useAuth();
+const LoginModal = () => {
+  const { isLoginModalOpen, setIsLoginModalOpen, handleLogin } = useAuth();
 
   const [isLoading, setIsLoading] = useState(false)
   const [loginError, setLoginError] = useState<string | null>(null)
@@ -24,10 +19,10 @@ const Login = ({ isOpen, setIsOpen }: LoginProps) => {
   });
 
   useEffect(() => {
-    if (!isOpen) {
+    if (!isLoginModalOpen) {
       setLoginError(null);
     }
-  }, [isOpen]);
+  }, [isLoginModalOpen]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
@@ -41,7 +36,7 @@ const Login = ({ isOpen, setIsOpen }: LoginProps) => {
     const loginSuccessful = await handleLogin(formData);
     setIsLoading(false);
     if (loginSuccessful) {
-      setIsOpen(false)
+      setIsLoginModalOpen(false)
       setLoginError(null)
     } else {
       setLoginError("Email ou mot de passe incorrect")
@@ -49,7 +44,7 @@ const Login = ({ isOpen, setIsOpen }: LoginProps) => {
   };
 
   return (
-    <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
+    <Modal isOpen={isLoginModalOpen} setIsOpen={setIsLoginModalOpen}>
       <Typography as="h2" variant="h2" className="pr-8">Connectez-vous à votre compte</Typography>
       
       <form onSubmit={handleSubmit}>
@@ -57,7 +52,6 @@ const Login = ({ isOpen, setIsOpen }: LoginProps) => {
           label="Email"
           type="email"
           name="email"
-          error={loginError}
           onChange={handleInputChange}
         />
         <Input 
@@ -81,4 +75,4 @@ const Login = ({ isOpen, setIsOpen }: LoginProps) => {
   );
 };
 
-export default Login;
+export default LoginModal;
