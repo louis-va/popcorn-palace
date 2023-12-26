@@ -1,6 +1,6 @@
-import { useAuth } from "../../auth/useAuth";
-import Logo from "../common/Logo";
-import Button from "../common/Button";
+import { useAuth } from "../auth/useAuth";
+import Logo from "./Logo";
+import Button from "./Button";
 
 const Nav = () => {
   const { setIsLoginModalOpen, isLoggedIn, userData } = useAuth();

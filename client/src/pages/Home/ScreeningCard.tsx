@@ -1,6 +1,6 @@
-import Typography from "../common/Typography"
-import Card from "../common/Card"
-import Pill from "../common/Pill"
+import Typography from "../../components/Typography"
+import Card from "../../components/Card"
+import Pill from "../../components/Pill"
 import { formatDateToDDMM, formatTimeToHHMM } from "../../utils/dateUtils";
 
 interface ScreeningCardProps {
