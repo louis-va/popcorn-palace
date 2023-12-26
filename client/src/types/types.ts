@@ -1,3 +1,4 @@
+/* Auth */
 export interface ILoginData {
   email: string;
   password: string;
@@ -19,4 +20,14 @@ export interface IAuthContext {
   setIsLoginModalOpen: React.Dispatch<React.SetStateAction<boolean>>,
   handleLogin: (data: ILoginData) => Promise<boolean>;
   handleLogout: () => void;
+}
+
+/* Screening */
+export interface IScreening {
+  movie: {
+    title: string;
+    poster: string;
+  },
+  _id: string;
+  date: Date;
 }

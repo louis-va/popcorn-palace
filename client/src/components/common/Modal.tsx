@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
-import Card from '@/components/Card';
-import Button from '@/components/Button';
-import Icon from '@/components/Icon';
+import Card from '@/components/common/Card';
+import Button from '@/components/common/Button';
+import Icon from '@/components/common/Icon';
 
 interface ModalProps {
   isOpen: boolean;

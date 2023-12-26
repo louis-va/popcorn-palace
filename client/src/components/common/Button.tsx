@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import Icon from '@/components/Icon';
+import Icon from '@/components/common/Icon';
 
 interface ButtonProps {
   type?: "submit" | "reset" | "button";

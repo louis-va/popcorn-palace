@@ -1,8 +1,8 @@
-import Container from "@/components/Container"
-import Nav from "@/components/Nav"
+import Container from "@/components/layout/Container"
+import Nav from "@/components/layout/Nav"
 import Hero from "@/pages/Home/Hero"
 import Screenings from "@/pages/Home/Screenings"
-import LoginModal from "@/auth/LoginModal";
+import LoginModal from "@/components/auth/LoginModal";
 
 const Home = () => {
   return (

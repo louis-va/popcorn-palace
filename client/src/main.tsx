@@ -4,8 +4,8 @@ import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } 
 
 import './main.css'
 import { AuthProvider } from '@/auth/AuthContext';
-import Home from "@/pages/Home/Home"
-import Screening from "@/pages/Screening/Screening";
+import Home from "@/pages/Home/HomePage"
+import Screening from "@/pages/Screening/ScreeningPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(

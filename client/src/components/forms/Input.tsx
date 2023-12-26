@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react';
-import Typography from '@/components/Typography';
-import Icon from '@/components/Icon';
+import Typography from '@/components/common/Typography';
+import Icon from '@/components/common/Icon';
 
 interface InputProps {
   label: string;

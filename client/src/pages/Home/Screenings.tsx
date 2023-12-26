@@ -1,33 +1,43 @@
 import { useState, useEffect } from 'react';
-import Typography from "@/components/Typography"
-import ScreeningCard from "@/pages/Home/ScreeningCard"
+import Typography from "@/components/common/Typography"
+import Card from "@/components/common/Card"
+import Pill from "@/components/common/Pill"
+import { IScreening } from '@/types/types';
+import { fetchScreenings } from '@/services/screening/fetchScreenings.service';
+import { formatDateToDDMM, formatTimeToHHMM } from "@/utils/date.helpers";
 
-interface IScreening {
-  movie: {
-    title: string;
-    poster: string;
-  },
-  _id: string;
+interface ScreeningCardProps {
+  id: string;
+  title: string;
+  poster: string;
   date: Date;
+  className?: string;
 }
 
-const fetchScreenings = async () => {
-  try {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/screenings`, {
-      method: 'GET',
-    });
-    if (!response.ok) throw new Error('Failed to fetch data');
-
-    const screenings: IScreening[] = await response.json();
-    const sortedScreenings = screenings
-      .map(screening => ({ ...screening, date: new Date(screening.date) }))
-      .sort((a, b) => a.date.getTime() - b.date.getTime());
-
-    return sortedScreenings;
-  } catch (error: any) {
-    throw new Error(error.message || 'An error occurred');
-  }
-};
+const ScreeningCard = ({ id, title, poster, date, className='' }: ScreeningCardProps) => {
+  return (
+    <a href={`/screenings/${id}`} className={`${className} rounded-lg`}>
+      <Card size="small" className="flex flex-col justify-between h-full hover:bg-white/10 hover:border-white/10">
+        <img 
+          className="w-full rounded"
+          src={poster}
+          alt={`Affiche du film ${title}`}
+        />
+        <Typography 
+          as="h3" 
+          variant="h5"
+          className="text-center mt-4"
+        >
+            {title}
+        </Typography>
+        <div className="mt-2 flex gap-2 justify-center items-center">
+          <Pill type="dark">{formatDateToDDMM(date)}</Pill>
+          <Pill type="light">{formatTimeToHHMM(date)}</Pill>
+        </div>
+      </Card>
+    </a>
+  )
+}
 
 const Screenings = () => {
   const [screeningsData, setScreeningsData] = useState<IScreening[] | null>(null);
