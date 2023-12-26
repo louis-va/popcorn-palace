@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import slugify from 'slugify';
 
 import { getCasting, getVideos, getMovieInfo } from '../services/tmdbService'
 import database from '../models';
@@ -16,6 +17,15 @@ async function addScreening(req: Request, res: Response) {
         getCasting(movieId), 
         getVideos(movieId)
       ]);
+
+    const slugTitle = slugify(movieInfo.title, {
+      replacement: '-',
+      lower: true,
+      strict: true,
+      locale: 'fr'
+    })
+
+    const slugDate = req.body.date.replace(/[-T:]/g, '');
 
     const screening = new Screening({
       movie: {
@@ -38,7 +48,8 @@ async function addScreening(req: Request, res: Response) {
         length: movieInfo.runtime,
         release: movieInfo.release_date
       },
-      date: req.body.date
+      date: req.body.date,
+      slug: `${slugTitle}-${slugDate}`
     });
 
     await screening.save();
@@ -53,7 +64,7 @@ async function addScreening(req: Request, res: Response) {
 async function getAllScreenings(req: Request, res: Response) {
   try {
     const screenings = await Screening.find()
-      .select('movie.title movie.poster date _id')
+      .select('movie.title movie.poster date slug')
 
     res.status(200).send(screenings);
   } catch (err: any) {

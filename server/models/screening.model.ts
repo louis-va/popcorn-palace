@@ -17,6 +17,7 @@ interface IMovie {
 interface IScreening extends Document {
   movie: IMovie,
   date: Date,
+  slug: string,
   bookedSeats: string[]
 }
 
@@ -35,6 +36,7 @@ const ScreeningSchema = new Schema({
     release: Date
   },
   date: Date,
+  slug: String,
   bookedSeats: [String]
 });
 
