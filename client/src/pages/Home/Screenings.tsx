@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import Typography from "../../components/Typography"
-import ScreeningCard from "./ScreeningCard"
+import Typography from "@/components/Typography"
+import ScreeningCard from "@/pages/Home/ScreeningCard"
 
 interface IScreening {
   movie: {

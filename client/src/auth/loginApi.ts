@@ -1,4 +1,4 @@
-import { ILoginData, IUserData } from './types';
+import { ILoginData, IUserData } from '@/auth/types';
 
 export const login = async (data: ILoginData) => {
   try {

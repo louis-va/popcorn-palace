@@ -1,6 +1,9 @@
 module.exports = {
   root: true,
-  env: { browser: true, es2020: true },
+  env: { 
+    browser: true, 
+    es2020: true
+  },
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
@@ -16,4 +19,21 @@ module.exports = {
       { allowConstantExport: true },
     ],
   },
+  settings: {
+    'import/resolver': {
+        node: {
+            extensions: ['.tsx', '.d.ts'],
+        },
+        alias: {
+            extensions: ['.tsx', '.d.ts'],
+            map: [
+                ['@/assets', './src/components'],
+                ['@/auth', './src/components'],
+                ['@/components', './src/components'],
+                ['@/pages', './src/pages'],
+                ['@/utils', './src/utils'],
+            ],
+        },
+    },
+},
 }

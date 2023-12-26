@@ -1,4 +1,4 @@
-import { IUserData } from './types';
+import { IUserData } from '@/auth/types';
 
 export const refresh = async () => {
   try {  

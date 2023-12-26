@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { ILoginData, IUserData, IAuthContext } from './types';
-import { login } from './loginApi';
-import { refresh } from './refreshApi';
+import { ILoginData, IUserData, IAuthContext } from '@/auth/types';
+import { login } from '@/auth/loginApi';
+import { refresh } from '@/auth/refreshApi';
 
 interface AuthProviderProps {
   children: React.ReactNode

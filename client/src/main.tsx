@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom/client'
 import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from "react-router-dom";
 
 import './main.css'
-import { AuthProvider } from './auth/AuthContext';
-import Home from "./pages/Home/Home"
-import Screening from "./pages/Screening/Screening";
+import { AuthProvider } from '@/auth/AuthContext';
+import Home from "@/pages/Home/Home"
+import Screening from "@/pages/Screening/Screening";
 
 const router = createBrowserRouter(
   createRoutesFromElements(

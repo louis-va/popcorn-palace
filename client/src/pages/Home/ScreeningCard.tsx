@@ -1,7 +1,7 @@
-import Typography from "../../components/Typography"
-import Card from "../../components/Card"
-import Pill from "../../components/Pill"
-import { formatDateToDDMM, formatTimeToHHMM } from "../../utils/dateUtils";
+import Typography from "@/components/Typography"
+import Card from "@/components/Card"
+import Pill from "@/components/Pill"
+import { formatDateToDDMM, formatTimeToHHMM } from "@/utils/dateUtils";
 
 interface ScreeningCardProps {
   id: string;

@@ -1,7 +1,7 @@
-import Card from "../../components/Card"
-import Typography from "../../components/Typography"
-import Icon from "../../components/Icon"
-import heroImage from "../../assets/images/hero-image.webp"
+import Card from "@/components/Card"
+import Typography from "@/components/Typography"
+import Icon from "@/components/Icon"
+import heroImage from "@/assets/images/hero-image.webp"
 
 const Hero = () => {
   return (

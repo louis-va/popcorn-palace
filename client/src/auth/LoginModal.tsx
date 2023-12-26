@@ -1,11 +1,11 @@
 import { useState, useEffect, ChangeEvent, FormEvent } from "react";
-import { useAuth } from "./useAuth";
-import Modal from "../components/Modal";
-import Typography from "../components/Typography";
-import Input from "../components/Input";
-import Checkbox from "../components/Checkbox";
-import Button from "../components/Button";
-import Link from "../components/Link";
+import { useAuth } from "@/auth/useAuth";
+import Modal from "@/components/Modal";
+import Typography from "@/components/Typography";
+import Input from "@/components/Input";
+import Checkbox from "@/components/Checkbox";
+import Button from "@/components/Button";
+import Link from "@/components/Link";
 
 const LoginModal = () => {
   const { isLoginModalOpen, setIsLoginModalOpen, handleLogin } = useAuth();

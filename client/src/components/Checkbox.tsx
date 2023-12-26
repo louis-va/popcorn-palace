@@ -1,5 +1,5 @@
 import { ChangeEvent } from 'react';
-import Typography from './Typography';
+import Typography from '@/components/Typography';
 
 interface CheckboxProps {
   label: string;
