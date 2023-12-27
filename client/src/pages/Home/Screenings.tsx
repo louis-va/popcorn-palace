@@ -2,21 +2,21 @@ import { useState, useEffect } from 'react';
 import Typography from "@/components/common/Typography"
 import Card from "@/components/common/Card"
 import Pill from "@/components/common/Pill"
-import { IScreening } from '@/types/types';
+import { IScreeningItem } from '@/types/types';
 import { fetchScreenings } from '@/services/screening/fetchScreenings.service';
 import { formatDateToDDMM, formatTimeToHHMM } from "@/utils/date.helpers";
 
 interface ScreeningCardProps {
-  slug: string;
+  path: string;
   title: string;
   poster: string;
   date: Date;
   className?: string;
 }
 
-const ScreeningCard = ({ slug, title, poster, date, className='' }: ScreeningCardProps) => {
+const ScreeningCard = ({ path, title, poster, date, className='' }: ScreeningCardProps) => {
   return (
-    <a href={`/screenings/${slug}`} className={`${className} rounded-lg`}>
+    <a href={`/screenings/${path}`} className={`${className} rounded-lg`}>
       <Card size="small" className="flex flex-col justify-between h-full hover:bg-white/10 hover:border-white/10">
         <img 
           className="w-full rounded"
@@ -40,7 +40,7 @@ const ScreeningCard = ({ slug, title, poster, date, className='' }: ScreeningCar
 }
 
 const Screenings = () => {
-  const [screeningsData, setScreeningsData] = useState<IScreening[] | null>(null);
+  const [screeningsData, setScreeningsData] = useState<IScreeningItem[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -71,7 +71,7 @@ const Screenings = () => {
           {screeningsData?.map((screening) => (
             <ScreeningCard
               key={screening._id}
-              slug={screening.slug}
+              path={`${screening.slug}/${screening._id}`}
               title={screening.movie.title}
               poster={screening.movie.poster}
               date={screening.date}
