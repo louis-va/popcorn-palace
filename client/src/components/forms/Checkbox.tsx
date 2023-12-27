@@ -10,7 +10,7 @@ interface CheckboxProps {
 
 const Checkbox = ({ label, name, onChange, className='' }: CheckboxProps) => {
   return (
-    <label className={`${className} block my-6 hover:cursor-pointer`}>
+    <label className={`${className} block my-2 hover:cursor-pointer`}>
       <input 
         type="checkbox"
         name={name} 

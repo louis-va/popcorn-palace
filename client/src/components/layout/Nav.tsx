@@ -3,7 +3,7 @@ import Logo from "@/components/common/Logo";
 import Button from "@/components/common/Button";
 
 const Nav = () => {
-  const { setIsLoginModalOpen, isLoggedIn, userData } = useAuth();
+  const { setIsAuthModalOpen, isLoggedIn, userData } = useAuth();
 
   const loggedInButton = (
     <Button variant="tertiary" size="small" onClick={() => { console.log("account") }}>
@@ -13,7 +13,7 @@ const Nav = () => {
   )
 
   const loggedOutButton = (
-    <Button variant="tertiary" size="small" onClick={() => setIsLoginModalOpen(true)}>
+    <Button variant="tertiary" size="small" onClick={() => setIsAuthModalOpen(true)}>
       Connexion
     </Button>
   )

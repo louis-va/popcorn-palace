@@ -23,7 +23,7 @@ export default {
         dark: 'rgb(250, 75, 0)'
       },
       'red': {
-        DEFAULT: 'rgb(220, 38, 38)'
+        DEFAULT: 'rgb(239, 68, 68)'
       },
       'green': {
         DEFAULT: 'rgb(63, 98, 18)'

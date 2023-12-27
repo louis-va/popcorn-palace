@@ -18,7 +18,7 @@ const Button = ({ type="button", variant, size, disabled, loading, onClick, chil
 
   switch (variant) {
     case "primary":
-      className += ` font-semibold text-black ${isDisabled ? 'bg-orange/50 hover:bg-orange/50' : 'bg-orange hover:bg-orange-dark'}`;
+      className += ` font-semibold text-black ${isDisabled ? 'bg-orange/30 hover:bg-orange/30' : 'bg-orange hover:bg-orange-dark'}`;
       break;
     case "secondary":
       className += ` font-semibold text-black ${isDisabled ? 'bg-white/50 hover:bg-white/50' : 'bg-white hover:bg-white/85'}`;
@@ -33,7 +33,7 @@ const Button = ({ type="button", variant, size, disabled, loading, onClick, chil
       className += ` text-sm px-4 py-2`;
       break;
     case "round":
-      className += ` text-lg w-6 h-6 flex justify-center items-center`;
+      className += ` text-lg w-8 h-8 flex justify-center items-center`;
       break;
     default:
       className += ` text-base px-8 py-3`;
@@ -41,11 +41,9 @@ const Button = ({ type="button", variant, size, disabled, loading, onClick, chil
   }  
 
   return (
-    <div>
-      <button type={type} disabled={isDisabled} onClick={onClick} className={`rounded-full flex justify-center items-center ${className}`}>
-        {(loading) ? <Icon name='spinner' className={`${(size==='small') ? 'w-5 h-5' : 'w-6 h-6'} animate-spin`}/> : children}
-      </button>
-    </div>
+    <button type={type} disabled={isDisabled} onClick={onClick} className={`rounded-full inline-flex justify-center items-center ${className}`}>
+      {(loading) ? <Icon name='spinner' className={`${(size==='small') ? 'w-5 h-5' : 'w-6 h-6'} animate-spin`}/> : children}
+    </button>
   );
 };
 

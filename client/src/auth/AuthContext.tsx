@@ -1,7 +1,8 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { ILoginData, IUserData, IAuthContext } from '@/types/types';
+import { ILoginData, IUserData, IAuthContext, ISignUpData } from '@/types/types';
 import { login } from '@/services/auth/login.service';
 import { refresh } from '@/services/auth/refresh.service';
+import { signUp } from '@/services/auth/signup.service';
 
 interface AuthProviderProps {
   children: React.ReactNode
@@ -11,7 +12,7 @@ const AuthContext = createContext<IAuthContext | undefined>(undefined);
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false);
   const [userData, setUserData] = useState<IUserData>();
 
   useEffect(() => {
@@ -39,17 +40,27 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   };
 
+  const handleSignUp = async (data: ISignUpData) => {
+    try {
+      const response = await signUp(data);
+      return response;
+    } catch (error: any) {
+      throw new Error("An error occured during signup");
+    }
+  }
+
   const handleLogout = () => {
     setIsLoggedIn(false);
   };
 
   const authValues: IAuthContext = {
     isLoggedIn,
-    isLoginModalOpen,
-    setIsLoginModalOpen,
+    isAuthModalOpen,
+    setIsAuthModalOpen,
     userData,
     handleLogin,
-    handleLogout,
+    handleSignUp,
+    handleLogout
   };
 
   return (
