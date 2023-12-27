@@ -12,21 +12,19 @@ const Nav = () => {
     </Button>
   )
 
-  const loggedOutButton = (
+  const signInButton = (
     <Button variant="tertiary" size="small" onClick={() => setIsAuthModalOpen(true)}>
       Connexion
     </Button>
   )
 
   return (
-    <>
-      <nav className="flex justify-between items-center h-20 sm:px-2">
-        <a href="/" className="rounded text-orange hover:text-orange-dark">
-          <Logo />
-        </a>
-        {isLoggedIn ? (loggedInButton) : (loggedOutButton)}
-      </nav>
-    </>
+    <nav className="flex justify-between items-center h-20 sm:px-2">
+      <a href="/" className="rounded text-white">
+        <Logo />
+      </a>
+      {isLoggedIn ? (loggedInButton) : (signInButton)}
+    </nav>
   );
 };
 

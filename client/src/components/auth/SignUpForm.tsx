@@ -144,7 +144,7 @@ const SignUpForm = () => {
         variant="primary"
         disabled={!isFormValidated}
         loading={isLoading}
-        className="w-full mt-4 mb-2 col-span-6"
+        className="w-full mt-4 col-span-6"
       >
         S'inscrire
       </Button>

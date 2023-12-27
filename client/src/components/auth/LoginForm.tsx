@@ -72,10 +72,6 @@ const LoginForm = () => {
     } else {
       setFormData({
         ...formData,
-        email: {
-          ...formData.email,
-          error: "Email ou mot de passe incorrect.",
-        },
         password: {
           ...formData.password,
           error: "Email ou mot de passe incorrect.",
@@ -115,7 +111,7 @@ const LoginForm = () => {
         variant="primary" 
         disabled={!isFormValidated}
         loading={isLoading} 
-        className="w-full mt-4 mb-2 col-span-6"
+        className="w-full mt-4 col-span-6"
       >
         Se connecter
       </Button>
