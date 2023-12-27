@@ -31,7 +31,7 @@ export interface IAuthContext {
 }
 
 /* Screening types */
-export interface IScreening {
+export interface IScreeningItem {
   movie: {
     title: string;
     poster: string;
@@ -39,6 +39,25 @@ export interface IScreening {
   _id: string;
   slug: string;
   date: Date;
+}
+
+export interface IScreening{
+  movie: {
+    title: string,
+    director: string[],
+    casting: string[],
+    genres: string[],
+    synopsis: string,
+    poster: string,
+    backdrop: string,
+    trailer: string,
+    score: string,
+    length: string,
+    release: Date
+  },
+  date: Date,
+  slug: string,
+  bookedSeats: string[]
 }
 
 /* Form types */

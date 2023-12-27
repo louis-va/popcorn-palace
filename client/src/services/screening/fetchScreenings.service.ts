@@ -1,4 +1,4 @@
-import { IScreening } from '@/types/types';
+import { IScreeningItem } from '@/types/types';
 
 export const fetchScreenings = async () => {
   try {
@@ -7,7 +7,7 @@ export const fetchScreenings = async () => {
     });
     if (!response.ok) throw new Error('Failed to fetch data');
 
-    const screenings: IScreening[] = await response.json();
+    const screenings: IScreeningItem[] = await response.json();
     const sortedScreenings = screenings
       .map(screening => ({ ...screening, date: new Date(screening.date) }))
       .sort((a, b) => a.date.getTime() - b.date.getTime());
