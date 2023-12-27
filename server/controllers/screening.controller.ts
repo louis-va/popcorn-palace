@@ -18,15 +18,6 @@ async function addScreening(req: Request, res: Response) {
         getVideos(movieId)
       ]);
 
-    const slugTitle = slugify(movieInfo.title, {
-      replacement: '-',
-      lower: true,
-      strict: true,
-      locale: 'fr'
-    })
-
-    const slugDate = req.body.date.replace(/[-T:]/g, '');
-
     const screening = new Screening({
       movie: {
         title: movieInfo.title,
@@ -49,7 +40,12 @@ async function addScreening(req: Request, res: Response) {
         release: movieInfo.release_date
       },
       date: req.body.date,
-      slug: `${slugTitle}-${slugDate}`
+      slug: slugify(movieInfo.title, {
+        replacement: '-',
+        lower: true,
+        strict: true,
+        locale: 'fr'
+      })
     });
 
     await screening.save();
