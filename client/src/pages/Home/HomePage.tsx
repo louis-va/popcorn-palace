@@ -3,6 +3,7 @@ import Nav from "@/components/layout/Nav"
 import Hero from "@/pages/Home/Hero"
 import Screenings from "@/pages/Home/Screenings"
 import AuthModal from "@/components/auth/AuthModal";
+import Footer from "@/components/layout/Footer";
 
 const Home = () => {
   return (
@@ -12,6 +13,7 @@ const Home = () => {
         <Nav />
         <Hero />
         <Screenings />
+        <Footer />
       </Container>
     </>
   )
