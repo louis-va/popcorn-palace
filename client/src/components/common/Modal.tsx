@@ -34,7 +34,7 @@ const Modal = ({ isOpen, setIsOpen, children, className }: ModalProps) => {
           onClick={() => {setIsOpen(false)}}
           className='absolute -top-[2.75rem] right-0'
         >
-          <Icon name='close' className='w-3 h-3'/>
+          <Icon name='close' className='w-4 h-4'/>
         </Button>
         {children}
       </Card>

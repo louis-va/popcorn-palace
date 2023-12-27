@@ -3,6 +3,9 @@ import { useAuth } from "@/auth/useAuth";
 import Input from "@/components/forms/Input";
 import Form from "../forms/Form";
 import Button from "@/components/common/Button";
+import Card from "../common/Card";
+import Typography from "../common/Typography";
+import Icon from "../common/Icon";
 import { IInputField } from "@/types/types";
 import { validateInput, validateEmail, validatePassword } from "@/utils/validation.helpers";
 
@@ -21,8 +24,9 @@ const initialFormData: IFormData = {
 };
 
 const SignUpForm = () => {
-  const { setIsAuthModalOpen, handleSignUp } = useAuth();
+  const { handleSignUp } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
+  const [isSignUpSuccessful, setIsSignUpSuccessful] = useState(false);
   const [formData, setFormData] = useState<IFormData>(initialFormData);
 
   const isFormValidated =
@@ -74,7 +78,7 @@ const SignUpForm = () => {
     });
     setIsLoading(false);
     if (response.ok) {
-      setIsAuthModalOpen(false);
+      setIsSignUpSuccessful(true);
     } else {
       setFormData({
         ...formData,
@@ -85,6 +89,15 @@ const SignUpForm = () => {
       });
     }
   };
+
+  if (isSignUpSuccessful) {
+    return (
+      <Card size="small" className="flex gap-2">
+        <div><Icon name='success' className="w-5 h-5"/></div>
+        <Typography as="p" variant="h4">Votre compte a été créé. Vous pouvez vous connecter.</Typography>
+      </Card>
+    )
+  }
 
   return (
     <Form onSubmit={handleSubmit}>
