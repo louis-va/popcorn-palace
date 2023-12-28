@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { IScreening } from '@/types/types';
+import { fetchScreening } from '@/services/screening/fetchScreening.service';
 import Container from "@/components/layout/Container"
 import Nav from "@/components/layout/Nav"
 import AuthModal from "@/components/auth/AuthModal";
 import Footer from "@/components/layout/Footer";
-import { IScreening } from '@/types/types';
-import { fetchScreening } from '@/services/screening/fetchScreening.service';
+import Header from '@/pages/Screening/Header';
 
 const Screening = () => {
   const { id } = useParams();
@@ -33,7 +34,7 @@ const Screening = () => {
       <AuthModal />
       <Container>
         <Nav />
-          <p>Movie: {screeningData.movie.title}</p>
+          <Header screeningData={screeningData} />
         <Footer />
       </Container>
     </>

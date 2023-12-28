@@ -7,7 +7,10 @@ export const fetchScreening = async (id: string) => {
 
     const screening: IScreening = await response.json();
 
-    return screening;
+    return {
+      ...screening,
+      date: new Date(screening.date)
+    };
   } catch (error: any) {
     throw new Error(error.message || 'An error occurred');
   }
