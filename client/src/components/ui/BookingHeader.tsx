@@ -2,12 +2,7 @@ import Typography from "@/components/common/Typography"
 import Pill from "@/components/common/Pill"
 import Icon from "@/components/common/Icon"
 import Button from "@/components/common/Button"
-import { IScreening } from "@/types/types"
 import { formatDateToDDMM, formatTimeToHHMM } from "@/utils/date.helpers"
-
-interface HeaderProps {
-  screeningData: IScreening;
-}
 
 interface RatingProps {
   score: number;
@@ -39,35 +34,48 @@ const Rating = ({ score }: RatingProps) => {
   )
 }
 
-const Header = ({ screeningData }: HeaderProps) => {
+interface BookingHeaderProps {
+  title: string;
+  date: Date;
+  backdrop: string;
+  score?: number;
+  trailer?: string;
+}
+
+const BookingHeader = ({ title, date, backdrop, score, trailer }: BookingHeaderProps) => {
   return (
     <section className="w-full flex flex-col gap-4 justify-end h-[30rem] sm:px-2 md:h-[30rem] md:flex-row md:justify-between md:items-end">
       <div className="absolute top-0 left-0 -z-10 w-full flex justify-center items-center h-[40rem] md:h-[40rem]">
         <img 
-          src={screeningData.movie.backdrop} 
-          alt={`Image du film ${screeningData.movie.title}`} 
+          src={backdrop} 
+          alt={`Image du film ${title}`} 
           className="object-cover w-full h-full"
         />
         <div className="absolute w-full h-full top-0 left-0 bg-gradient-to-b from-black/40 via-black/40 to-black/100"></div>
       </div>
 
       <div>
-        <Rating score={parseFloat(screeningData.movie.score)} />
-        <Typography as="h1" variant="h1" className="mt-2 mb-4">{screeningData.movie.title}</Typography>
+        {(score) ? (
+          <Rating score={score} />
+        ): (<></>)}
+
+        <Typography as="h1" variant="h1" className="mt-2 mb-4">{title}</Typography>
         <div className="flex gap-2">
-          <Pill type="dark">{formatDateToDDMM(screeningData.date)}</Pill>
-          <Pill type="light" className="backdrop-blur-sm">{formatTimeToHHMM(screeningData.date)}</Pill>
+          <Pill type="dark">{formatDateToDDMM(date)}</Pill>
+          <Pill type="light" className="backdrop-blur-sm">{formatTimeToHHMM(date)}</Pill>
         </div>
       </div>
 
-      <div>
-        <Button type="button" variant="tertiary" size="small" className="backdrop-blur-sm">
-          <Icon name="play" className="w-4 h-4 mr-2"/>
-          Voir le trailer
-        </Button>
-      </div>
+      {(trailer) ? (
+        <div>
+          <Button type="button" variant="tertiary" size="small" className="backdrop-blur-sm">
+            <Icon name="play" className="w-4 h-4 mr-2"/>
+            Voir le trailer
+          </Button>
+        </div>
+      ): (<></>)}
     </section>
   )
 }
 
-export default Header
+export default BookingHeader

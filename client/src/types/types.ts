@@ -60,6 +60,18 @@ export interface IScreening{
   bookedSeats: string[]
 }
 
+/* Booking types */
+export interface ITicket {
+  rate: string;
+  price: number;
+  seat: string | null;
+}
+
+export interface IBooking {
+  screening_id: string;
+  tickets: ITicket[];
+}
+
 /* Form types */
 export interface IInputField {
   value: string | null;
