@@ -3,7 +3,7 @@ import { IScreening } from './screening.model';
 import { IUser } from './user.model';
 
 interface ITicket {
-  rate: "Adulte" | "Étudiant" | "-18 ans" | "5 places",
+  rate: "Adulte" | "Étudiant" | "Réduit",
   amount: number
 }
 
@@ -25,7 +25,7 @@ interface IBooking extends Document {
 const TicketSchema = new Schema({
   rate: {
     type: String,
-    enum: ["Adulte", "Étudiant", "-18 ans", "5 places"]
+    enum: ["Adulte", "Étudiant", "Réduit"]
   },
   amount: Number
 })
