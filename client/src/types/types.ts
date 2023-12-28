@@ -64,12 +64,12 @@ export interface IScreening{
 export interface ITicket {
   rate: string;
   price: number;
-  seat: string | null;
 }
 
 export interface IBooking {
   screening_id: string;
   tickets: ITicket[];
+  seats: string[];
 }
 
 /* Form types */

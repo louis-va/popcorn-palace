@@ -2,11 +2,12 @@ import { ReactNode } from 'react';
 
 interface PillProps {
   type: "dark" | "light";
+  size?: "small"
   children: ReactNode;
   className?: string;
 }
 
-const Pill = ({ type, children, className='' }: PillProps) => {  
+const Pill = ({ type, size, children, className='' }: PillProps) => {  
   switch (type) {
     case "dark":
       className += " bg-black"
@@ -16,8 +17,17 @@ const Pill = ({ type, children, className='' }: PillProps) => {
       break;
   }
 
+  switch (size) {
+    case "small":
+      className += " text-xs px-2"
+      break;
+    default:
+      className += " text-sm px-3 py-1"
+      break;
+  }
+
   return (
-    <div className={`text-sm px-3 py-1 rounded-full ${className}`}>
+    <div className={`inline-flex items-center rounded-full ${className}`}>
       {children}
     </div>
   );

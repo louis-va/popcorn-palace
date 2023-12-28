@@ -3,7 +3,7 @@ import Typography from "../common/Typography";
 import Button from '../common/Button';
 
 interface BookingSummaryProps {
-  booking: IBooking | null;
+  booking: IBooking;
   buttonLabel?: string;
   buttonAction?: () => void;
 }
@@ -15,8 +15,10 @@ function validateTickets(tickets: ITicket[]) {
 }
 
 const BookingSummary = ({ booking, buttonLabel, buttonAction }: BookingSummaryProps) => {
-  const total = (booking) ? booking.tickets.reduce((sum, ticket) => sum + ticket.price, 0) : 0;
-  const isBookingValid = (booking) ? validateTickets(booking.tickets) : false;
+
+  const isBookingNotEmpty = (booking?.tickets.length > 0)
+  const total = (isBookingNotEmpty) ? booking.tickets.reduce((sum, ticket) => sum + ticket.price, 0) : 0;
+  const isBookingValid = (isBookingNotEmpty) ? validateTickets(booking.tickets) : false;
 
   return (
     <section>
@@ -26,7 +28,7 @@ const BookingSummary = ({ booking, buttonLabel, buttonAction }: BookingSummaryPr
         </div>
 
         <div className="h-60 p-4 sm:p-6 overflow-y-scroll w-full">
-          {(!booking) ? (
+          {(isBookingNotEmpty) ? (
             <div className="w-full h-full flex items-center justify-center">
               <Typography as="p" variant="p" className="text-white/30 text-center max-w-52">Veuillez sélectionner vos tickets et vos places</Typography>
             </div>

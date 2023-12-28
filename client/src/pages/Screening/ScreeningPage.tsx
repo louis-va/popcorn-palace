@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { IScreening, IBooking } from '@/types/types';
+import { IScreening, IBooking, ITicket } from '@/types/types';
 import { fetchScreening } from '@/services/screening/fetchScreening.service';
 import Container from "@/components/layout/Container"
 import Nav from "@/components/layout/Nav"
@@ -10,12 +10,24 @@ import BookingHeader from '@/components/ui/BookingHeader';
 import BookingSteps from '@/components/ui/BookingSteps';
 import BookingSummary from '@/components/ui/BookingSummary';
 import AboutMovie from './AboutMovie';
+import TicketSelection from './TicketSelection';
 
 const Screening = () => {
   const { id } = useParams();
   const [screeningData, setScreeningData] = useState<IScreening | null>(null);
-  const [bookingData, setBookingData] = useState<IBooking | null>(null);
+  const [bookingData, setBookingData] = useState<IBooking>({
+    screening_id: id!,
+    tickets: [],
+    seats: []
+  });
   const [loading, setLoading] = useState<boolean>(true);
+
+  const setTickets = (tickets: ITicket[]) => {
+    setBookingData({
+      ...bookingData,
+      tickets: tickets
+    })
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -54,6 +66,7 @@ const Screening = () => {
               synopsis={screeningData.movie.synopsis}
               genres={screeningData.movie.genres}
             />
+            <TicketSelection tickets={bookingData.tickets} setTickets={setTickets}/>
           </div>
 
           <div className="col-span-3 order-1 lg:col-span-1 lg:order-2">

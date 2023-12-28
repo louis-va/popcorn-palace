@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 interface CardProps {
-  size?: "small";
+  size?: "small" | "medium";
   color?: "blue" | "pink" | "yellow" | "orange";
   children: ReactNode;
   className?: string;
@@ -10,10 +10,13 @@ interface CardProps {
 const Card = ({ size, color, children, className='' }: CardProps) => {
   switch (size) {
     case "small":
-      className += " p-2 sm:p-3"
+      className += " px-2 py-3 rounded sm:px-3 sm:py-4"
+      break;
+    case "medium":
+      className += " p-2 sm:p-3 rounded-lg"
       break;
     default:
-      className += " p-4 sm:p-6"
+      className += " p-4 sm:p-6 rounded-lg"
       break;
   }
 
@@ -36,7 +39,7 @@ const Card = ({ size, color, children, className='' }: CardProps) => {
   }
 
   return (
-    <div className={`w-full rounded-lg border ${className}`}>
+    <div className={`w-full border ${className}`}>
       {children}
     </div>
   );
