@@ -56,14 +56,14 @@ const Header = ({ screeningData }: HeaderProps) => {
         <Typography as="h1" variant="h1" className="mt-2 mb-4">{screeningData.movie.title}</Typography>
         <div className="flex gap-2">
           <Pill type="dark">{formatDateToDDMM(screeningData.date)}</Pill>
-          <Pill type="light">{formatTimeToHHMM(screeningData.date)}</Pill>
+          <Pill type="light" className="backdrop-blur-sm">{formatTimeToHHMM(screeningData.date)}</Pill>
         </div>
       </div>
 
       <div>
-        <Button type="button" variant="tertiary" size="small">
+        <Button type="button" variant="tertiary" size="small" className="backdrop-blur-sm">
           <Icon name="play" className="w-4 h-4 mr-2"/>
-          Watch trailer
+          Voir le trailer
         </Button>
       </div>
     </section>

@@ -39,7 +39,7 @@ const ScreeningCard = ({ path, title, poster, date, className='' }: ScreeningCar
   )
 }
 
-const Screenings = () => {
+const ScreeningGrid = () => {
   const [screeningsData, setScreeningsData] = useState<IScreeningItem[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -83,4 +83,4 @@ const Screenings = () => {
   )
 }
 
-export default Screenings
+export default ScreeningGrid

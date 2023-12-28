@@ -7,6 +7,7 @@ import Nav from "@/components/layout/Nav"
 import AuthModal from "@/components/auth/AuthModal";
 import Footer from "@/components/layout/Footer";
 import Header from '@/pages/Screening/Header';
+import AboutMovie from './AboutMovie';
 
 const Screening = () => {
   const { id } = useParams();
@@ -34,7 +35,12 @@ const Screening = () => {
       <AuthModal />
       <Container>
         <Nav />
-          <Header screeningData={screeningData} />
+        <Header screeningData={screeningData} />
+        <div className="grid grid-cols-3 gap-4 mt-12">
+          <div className="col-span-3 lg:col-span-2">
+            <AboutMovie screeningData={screeningData} />
+          </div>
+        </div>
         <Footer />
       </Container>
     </>
