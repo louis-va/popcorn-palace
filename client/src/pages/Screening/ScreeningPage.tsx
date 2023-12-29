@@ -73,7 +73,7 @@ const Screening = () => {
             <BookingSteps step={1} />
           </div>
 
-          <div className="col-span-3 order-3 lg:col-span-1 lg:order-3">
+          <div className="col-span-3 order-3 lg:col-span-1 lg:order-3 lg:sticky lg:top-4">
             <BookingSummary
               booking={bookingData}
               buttonLabel="Suivant"

@@ -15,25 +15,29 @@ function validateTickets(tickets: ITicket[]) {
 }
 
 const BookingSummary = ({ booking, buttonLabel, buttonAction }: BookingSummaryProps) => {
-
-  const isBookingNotEmpty = (booking?.tickets.length > 0)
-  const total = (isBookingNotEmpty) ? booking.tickets.reduce((sum, ticket) => sum + ticket.price, 0) : 0;
-  const isBookingValid = (isBookingNotEmpty) ? validateTickets(booking.tickets) : false;
+  const isBookingEmpty = (booking?.tickets.length == 0)
+  const total = (!isBookingEmpty) ? booking.tickets.reduce((sum, ticket) => sum + ticket.price, 0) : 0;
+  const isBookingValid = (!isBookingEmpty) && validateTickets(booking.tickets) && booking.tickets.length == booking.seats.length
 
   return (
-    <section>
+    <section className="top-2">
       <div className="w-full rounded-lg border bg-white/5 border-white/5 backdrop-blur">
         <div className="border-b border-b-white/5 p-4 sm:p-6">
           <Typography as="h2" variant="h3">Réservation</Typography>
         </div>
 
-        <div className="h-60 p-4 sm:p-6 overflow-y-scroll w-full">
-          {(isBookingNotEmpty) ? (
-            <div className="w-full h-full flex items-center justify-center">
-              <Typography as="p" variant="p" className="text-white/30 text-center max-w-52">Veuillez sélectionner vos tickets et vos places</Typography>
+        <div className="min-h-40 px-4 py-4 sm:px-6 overflow-y-scroll w-full">
+          {(isBookingEmpty) ? (
+            <div className="w-full h-32 flex items-center justify-center">
+              <Typography as="p" variant="small" className="text-white/30 text-center max-w-40">Veuillez sélectionner vos tickets et vos places</Typography>
             </div>
           ) : (
-            <></>
+            <>
+            <BookingSummaryTableHead/>
+            {booking.tickets.map((ticket, index) => (
+              <BookingSummaryTableRow key={index} rate={ticket.rate} price={ticket.price} seat={null} />
+            ))}
+            </>
           )}
         </div>
 
@@ -59,6 +63,44 @@ const BookingSummary = ({ booking, buttonLabel, buttonAction }: BookingSummaryPr
         </div>
       </div>
     </section>
+  )
+}
+
+const BookingSummaryTableHead = () => {
+  return (
+    <div className='flex justify-between w-full py-2 mb-2 border-b-2 border-b-white/5'>
+      <div className='w-2/4'>
+        <Typography as="p" variant="small" className="text-white">Ticket</Typography>
+      </div>
+      <div className='w-1/4 text-right'>
+        <Typography as="p" variant="small" className="text-white">Prix</Typography>
+      </div>
+      <div className='w-1/4 text-right'>
+        <Typography as="p" variant="small" className="text-white">Siège</Typography>
+      </div>
+    </div>
+  )
+}
+
+interface BookingSummaryTableRowProps {
+  rate: string;
+  price: number;
+  seat: string | null;
+}
+
+const BookingSummaryTableRow = ({ rate, price, seat }: BookingSummaryTableRowProps) => {
+  return (
+    <div className='flex justify-between w-full py-2 '>
+      <div className='w-2/4'>
+        <Typography as="p" variant="small" className="text-white-muted">{rate}</Typography>
+      </div>
+      <div className='w-1/4 text-right'>
+        <Typography as="p" variant="small" className="text-white-muted">{price}€</Typography>
+      </div>
+      <div className='w-1/4 text-right'>
+        <Typography as="p" variant="small" className="text-red">{(seat) ? seat : '...'}</Typography>
+      </div>
+    </div>
   )
 }
 

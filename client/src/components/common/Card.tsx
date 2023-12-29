@@ -10,7 +10,7 @@ interface CardProps {
 const Card = ({ size, color, children, className='' }: CardProps) => {
   switch (size) {
     case "small":
-      className += " px-2 py-3 rounded sm:px-3 sm:py-4"
+      className += " px-2 py-3 rounded sm:px-3 sm:py-3"
       break;
     case "medium":
       className += " p-2 sm:p-3 rounded-lg"

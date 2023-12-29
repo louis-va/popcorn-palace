@@ -88,11 +88,10 @@ interface RateCardProps {
 
 const RateCard = ({ rate, description, price, number, increase, decrease }: RateCardProps) => {
   return (
-    <Card size="small" className="flex justify-between gap-8 mt-3">
+    <div className="flex justify-between py-4 gap-8 border-t border-t-white/5">
       <div>
         <div className="flex gap-2 mb-1">
-          <Typography as="h3" variant="h3">{rate}</Typography>
-          <Pill type="light" size="small">{price}€</Pill>
+          <Typography as="h3" variant="h4">{rate} <span className='text-white-muted ml-2'>{price}€</span></Typography>
         </div>
         <Typography as="p" variant="small" className="text-white/60">{description}</Typography>
       </div>
@@ -102,7 +101,7 @@ const RateCard = ({ rate, description, price, number, increase, decrease }: Rate
         <Typography as="p" variant="h2" className="text-white w-8 text-center">{number}</Typography>
         <Button type="button" variant="tertiary" size="round" onClick={increase}>+</Button>
       </div>
-    </Card>
+    </div>
   )
 }
 
