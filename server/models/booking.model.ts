@@ -7,18 +7,12 @@ interface ITicket {
   amount: number
 }
 
-interface ISnack {
-  name: string,
-  amount: number
-}
-
 interface IBooking extends Document {
   screening_id: Types.ObjectId | IScreening,
   user_id: Types.ObjectId | IUser,
   seats: string[],
   qr_code: string,
   tickets: ITicket[],
-  snacks: ISnack[],
   price: number
 }
 
@@ -27,11 +21,6 @@ const TicketSchema = new Schema({
     type: String,
     enum: ["Adulte", "Étudiant", "Réduit"]
   },
-  amount: Number
-})
-
-const SnackSchema = new Schema({
-  name: String,
   amount: Number
 })
 
@@ -47,7 +36,6 @@ const BookingSchema = new Schema({
   seats: [String],
   qr_code: String,
   tickets: [TicketSchema],
-  snacks: [SnackSchema],
   price: Number
 });
 

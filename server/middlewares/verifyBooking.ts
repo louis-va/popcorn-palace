@@ -7,7 +7,7 @@ const Booking = database.booking;
 function validateSeats(req:Request, res: Response, next: NextFunction) {
   try {
     const seats = req.body.seats
-    const regex = /^[A-H]([1-9]|10|11)$/; // Regular expression to match seats criteria
+    const regex = /^[A-I]([1-9]|10|11)$/; // Regular expression to match seats criteria
   
     for (let i = 0; i < seats.length; i++) {
       if (!regex.test(seats[i])) {

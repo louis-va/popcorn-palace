@@ -13,7 +13,6 @@ function addBooking(req: AuthenticatedRequest, res: Response) {
       user_id: req.userId,
       seats: req.body.seats,
       tickets: req.body.tickets,
-      snacks: req.body.snacks,
       price: req.body.price
     });
 
