@@ -1,7 +1,6 @@
 import { ITicket } from '@/types/types';
 import Card from "@/components/common/Card";
 import Typography from "@/components/common/Typography"
-import Pill from '@/components/common/Pill';
 import Button from '@/components/common/Button';
 
 const ticketRates = [
@@ -25,6 +24,34 @@ const ticketRates = [
 interface TicketSelectionProps {
   tickets: ITicket[];
   setTickets: (tickets: ITicket[]) => void;
+}
+
+interface RateCardProps {
+  rate: string;
+  description: string;
+  price: number;
+  number: number;
+  increase: () => void;
+  decrease: () => void;
+}
+
+const RateCard = ({ rate, description, price, number, increase, decrease }: RateCardProps) => {
+  return (
+    <div className="flex justify-between py-4 gap-8 border-t border-t-white/5">
+      <div>
+        <div className="flex gap-2 mb-1">
+          <Typography as="h3" variant="h4">{rate} <span className='text-white-muted ml-2'>{price}€</span></Typography>
+        </div>
+        <Typography as="p" variant="small" className="text-white/60">{description}</Typography>
+      </div>
+
+      <div className="flex gap-1 items-center">
+        <Button type="button" variant="tertiary" size="round" onClick={decrease}>-</Button>
+        <Typography as="p" variant="h2" className="text-white w-8 text-center">{number}</Typography>
+        <Button type="button" variant="tertiary" size="round" onClick={increase}>+</Button>
+      </div>
+    </div>
+  )
 }
 
 const TicketSelection = ({ tickets, setTickets }: TicketSelectionProps) => {
@@ -59,8 +86,8 @@ const TicketSelection = ({ tickets, setTickets }: TicketSelectionProps) => {
   return (
     <section>
       <Card>
-        <Typography as="h2" variant="h2" className='mb-2'>Tarifs</Typography>
-        <Typography as="p" variant="p" className='text-white-muted mb-4'>Sélectionnez vos tickets (max. 10)</Typography>
+        <Typography as="h2" variant="h2" className='mb-2'>Tickets</Typography>
+        <Typography as="p" variant="p" className='text-white-muted mb-4'>Sélectionnez vos tickets <span className="text-xs">(max. 10)</span></Typography>
         {ticketRates.map((ticketRate, index) => (
           <RateCard 
             key={index}
@@ -74,34 +101,6 @@ const TicketSelection = ({ tickets, setTickets }: TicketSelectionProps) => {
         ))}
       </Card>
     </section>
-  )
-}
-
-interface RateCardProps {
-  rate: string;
-  description: string;
-  price: number;
-  number: number;
-  increase: () => void;
-  decrease: () => void;
-}
-
-const RateCard = ({ rate, description, price, number, increase, decrease }: RateCardProps) => {
-  return (
-    <div className="flex justify-between py-4 gap-8 border-t border-t-white/5">
-      <div>
-        <div className="flex gap-2 mb-1">
-          <Typography as="h3" variant="h4">{rate} <span className='text-white-muted ml-2'>{price}€</span></Typography>
-        </div>
-        <Typography as="p" variant="small" className="text-white/60">{description}</Typography>
-      </div>
-
-      <div className="flex gap-1 items-center">
-        <Button type="button" variant="tertiary" size="round" onClick={decrease}>-</Button>
-        <Typography as="p" variant="h2" className="text-white w-8 text-center">{number}</Typography>
-        <Button type="button" variant="tertiary" size="round" onClick={increase}>+</Button>
-      </div>
-    </div>
   )
 }
 

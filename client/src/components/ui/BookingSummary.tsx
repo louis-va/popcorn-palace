@@ -8,10 +8,48 @@ interface BookingSummaryProps {
   buttonAction?: () => void;
 }
 
+interface BookingSummaryTableRowProps {
+  rate: string;
+  price: number;
+  seat: string | null;
+}
+
 function validateTickets(tickets: ITicket[]) {
   return tickets.every(ticket =>
     Object.values(ticket).every(value => value !== undefined && value !== null && value !== '')
   );
+}
+
+const BookingSummaryTableHead = () => {
+  return (
+    <div className='flex justify-between w-full py-2 mb-2 border-b-2 border-b-white/5'>
+      <div className='w-2/4'>
+        <Typography as="p" variant="small" className="text-white">Ticket</Typography>
+      </div>
+      <div className='w-1/4 text-right'>
+        <Typography as="p" variant="small" className="text-white">Prix</Typography>
+      </div>
+      <div className='w-1/4 text-right'>
+        <Typography as="p" variant="small" className="text-white">Siège</Typography>
+      </div>
+    </div>
+  )
+}
+
+const BookingSummaryTableRow = ({ rate, price, seat }: BookingSummaryTableRowProps) => {
+  return (
+    <div className='flex justify-between w-full py-2 '>
+      <div className='w-2/4'>
+        <Typography as="p" variant="small" className="text-white-muted">{rate}</Typography>
+      </div>
+      <div className='w-1/4 text-right'>
+        <Typography as="p" variant="small" className="text-white-muted">{price}€</Typography>
+      </div>
+      <div className='w-1/4 text-right'>
+        <Typography as="p" variant="small" className={(seat) ? 'text-white-muted' : 'text-red'}>{(seat) ? seat : '...'}</Typography>
+      </div>
+    </div>
+  )
 }
 
 const BookingSummary = ({ booking, buttonLabel, buttonAction }: BookingSummaryProps) => {
@@ -35,7 +73,12 @@ const BookingSummary = ({ booking, buttonLabel, buttonAction }: BookingSummaryPr
             <>
             <BookingSummaryTableHead/>
             {booking.tickets.map((ticket, index) => (
-              <BookingSummaryTableRow key={index} rate={ticket.rate} price={ticket.price} seat={null} />
+              <BookingSummaryTableRow 
+                key={index} 
+                rate={ticket.rate} 
+                price={ticket.price} 
+                seat={(booking.seats.length >= index+1) ? booking.seats[index] : null} 
+              />
             ))}
             </>
           )}
@@ -63,44 +106,6 @@ const BookingSummary = ({ booking, buttonLabel, buttonAction }: BookingSummaryPr
         </div>
       </div>
     </section>
-  )
-}
-
-const BookingSummaryTableHead = () => {
-  return (
-    <div className='flex justify-between w-full py-2 mb-2 border-b-2 border-b-white/5'>
-      <div className='w-2/4'>
-        <Typography as="p" variant="small" className="text-white">Ticket</Typography>
-      </div>
-      <div className='w-1/4 text-right'>
-        <Typography as="p" variant="small" className="text-white">Prix</Typography>
-      </div>
-      <div className='w-1/4 text-right'>
-        <Typography as="p" variant="small" className="text-white">Siège</Typography>
-      </div>
-    </div>
-  )
-}
-
-interface BookingSummaryTableRowProps {
-  rate: string;
-  price: number;
-  seat: string | null;
-}
-
-const BookingSummaryTableRow = ({ rate, price, seat }: BookingSummaryTableRowProps) => {
-  return (
-    <div className='flex justify-between w-full py-2 '>
-      <div className='w-2/4'>
-        <Typography as="p" variant="small" className="text-white-muted">{rate}</Typography>
-      </div>
-      <div className='w-1/4 text-right'>
-        <Typography as="p" variant="small" className="text-white-muted">{price}€</Typography>
-      </div>
-      <div className='w-1/4 text-right'>
-        <Typography as="p" variant="small" className="text-red">{(seat) ? seat : '...'}</Typography>
-      </div>
-    </div>
   )
 }
 

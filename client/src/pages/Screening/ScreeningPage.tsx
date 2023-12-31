@@ -11,21 +11,40 @@ import BookingSteps from '@/components/ui/BookingSteps';
 import BookingSummary from '@/components/ui/BookingSummary';
 import AboutMovie from './AboutMovie';
 import TicketSelection from './TicketSelection';
+import SeatSelection from './SeatSelection';
 
 const Screening = () => {
   const { id } = useParams();
+
+  const [loading, setLoading] = useState<boolean>(true);
   const [screeningData, setScreeningData] = useState<IScreening | null>(null);
   const [bookingData, setBookingData] = useState<IBooking>({
     screening_id: id!,
     tickets: [],
     seats: []
   });
-  const [loading, setLoading] = useState<boolean>(true);
 
   const setTickets = (tickets: ITicket[]) => {
+    // remove a seat if a ticket is removed
+    if (tickets.length < bookingData.seats.length) {
+      bookingData.seats.pop()
+      setBookingData({
+        ...bookingData,
+        tickets: tickets,
+        seats: bookingData.seats
+      })
+    } else {
+      setBookingData({
+        ...bookingData,
+        tickets: tickets
+      })
+    }
+  }
+
+  const setSeats = (seats: string[]) => {
     setBookingData({
       ...bookingData,
-      tickets: tickets
+      seats: seats
     })
   }
 
@@ -66,7 +85,13 @@ const Screening = () => {
               synopsis={screeningData.movie.synopsis}
               genres={screeningData.movie.genres}
             />
-            <TicketSelection tickets={bookingData.tickets} setTickets={setTickets}/>
+            <TicketSelection tickets={bookingData.tickets} setTickets={setTickets} />
+            <SeatSelection 
+              selectedSeats={bookingData.seats} 
+              numberToSelect={bookingData.tickets.length} 
+              bookedSeats={screeningData.bookedSeats}
+              setSeats={setSeats} 
+            />
           </div>
 
           <div className="col-span-3 order-1 lg:col-span-1 lg:order-2">
