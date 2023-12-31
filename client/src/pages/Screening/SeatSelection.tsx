@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Card from "@/components/common/Card";
 import Typography from "@/components/common/Typography"
 

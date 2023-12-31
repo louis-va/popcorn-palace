@@ -58,51 +58,49 @@ const BookingSummary = ({ booking, buttonLabel, buttonAction }: BookingSummaryPr
   const isBookingValid = (!isBookingEmpty) && validateTickets(booking.tickets) && booking.tickets.length == booking.seats.length
 
   return (
-    <section className="top-2">
-      <div className="w-full rounded-lg border bg-white/5 border-white/5 backdrop-blur">
-        <div className="border-b border-b-white/5 p-4 sm:p-6">
-          <Typography as="h2" variant="h3">Réservation</Typography>
-        </div>
+    <section className="w-full rounded-lg border bg-white/5 border-white/5 backdrop-blur">
+      <div className="border-b border-b-white/5 p-4 sm:p-6">
+        <Typography as="h2" variant="h3">Réservation</Typography>
+      </div>
 
-        <div className="min-h-40 px-4 py-4 sm:px-6 overflow-y-scroll w-full">
-          {(isBookingEmpty) ? (
-            <div className="w-full h-32 flex items-center justify-center">
-              <Typography as="p" variant="small" className="text-white/30 text-center max-w-40">Veuillez sélectionner vos tickets et vos places</Typography>
-            </div>
+      <div className="min-h-40 px-4 py-4 overflow-y-scroll w-full sm:px-6 lg:max-h-[calc(100vh-12.75rem)]">
+        {(isBookingEmpty) ? (
+          <div className="w-full h-32 flex items-center justify-center">
+            <Typography as="p" variant="small" className="text-white/30 text-center max-w-40">Veuillez sélectionner vos tickets et vos places</Typography>
+          </div>
+        ) : (
+          <>
+          <BookingSummaryTableHead/>
+          {booking.tickets.map((ticket, index) => (
+            <BookingSummaryTableRow 
+              key={index} 
+              rate={ticket.rate} 
+              price={ticket.price} 
+              seat={(booking.seats.length >= index+1) ? booking.seats[index] : null} 
+            />
+          ))}
+          </>
+        )}
+      </div>
+
+      <div className="flex justify-between items-center border-t border-t-white/5 p-4 sm:p-6">
+        <div>
+          <Typography as="h3" variant="small" className="text-white-muted">Total</Typography>
+          <Typography as="p" variant="h4">{total}€</Typography>
+        </div>
+        <div>
+          {(buttonLabel) ? (
+            <Button 
+              type="button" 
+              variant="primary" 
+              disabled={!isBookingValid}
+              onClick={buttonAction}
+            >
+              {buttonLabel}
+            </Button>
           ) : (
-            <>
-            <BookingSummaryTableHead/>
-            {booking.tickets.map((ticket, index) => (
-              <BookingSummaryTableRow 
-                key={index} 
-                rate={ticket.rate} 
-                price={ticket.price} 
-                seat={(booking.seats.length >= index+1) ? booking.seats[index] : null} 
-              />
-            ))}
-            </>
+            <></>
           )}
-        </div>
-
-        <div className="flex justify-between items-center border-t border-t-white/5 p-4 sm:p-6">
-          <div>
-            <Typography as="h3" variant="small" className="text-white-muted">Total</Typography>
-            <Typography as="p" variant="h4">{total}€</Typography>
-          </div>
-          <div>
-            {(buttonLabel) ? (
-              <Button 
-                type="button" 
-                variant="primary" 
-                disabled={!isBookingValid}
-                onClick={buttonAction}
-              >
-                {buttonLabel}
-              </Button>
-            ) : (
-              <></>
-            )}
-          </div>
         </div>
       </div>
     </section>
