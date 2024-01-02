@@ -25,6 +25,24 @@ interface SeatProps {
   remove: () => void;
 }
 
+const ScreenIllustration = () => {
+  return (
+    <div className="w-full mb-8 opacity-60">
+      <svg className="w-full" width="374" height="33" viewBox="0 0 374 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 11.2221C144.303 3.00856 226.16 2.84379 374 11.2221L348 32.2221C217.928 24.4625 152.249 23.9523 27.5 32.2221L0 11.2221Z" fill="url(#paint0_linear_156_211)" fill-opacity="0.1"/>
+        <path d="M0 11.2221C144.303 3.00856 226.16 2.84379 374 11.2221V6.5C227.07 -1.94324 145.243 -0.925361 0 6.49988V11.2221Z" fill="white" fillOpacity="0.15"/>
+        <path d="M373.5 10.6929C226.154 2.35413 144.322 2.51768 0.5 10.6928V6.97499C145.278 -0.41956 227.047 -1.43147 373.5 6.97211V10.6929ZM1.37718 11.6446C144.403 3.53174 226.131 3.37109 372.677 11.648L347.836 31.7114C217.94 23.9657 152.244 23.4564 27.6543 31.7107L1.37718 11.6446Z" stroke="white" strokeOpacity="0.04"/>
+        <defs>
+        <linearGradient id="paint0_linear_156_211" x1="187" y1="5.00049" x2="187" y2="32.2227" gradientUnits="userSpaceOnUse">
+        <stop stopColor="white"/>
+        <stop offset="1" stopColor="white" stopOpacity="0"/>
+        </linearGradient>
+        </defs>
+      </svg>
+    </div>
+  )
+}
+
 const Legend = () => {
   return (
     <div className="flex flex-wrap mt-8 gap-4 w-full justify-center sm:flex-col">
@@ -109,25 +127,32 @@ const SeatSelectionTool = ({ selectedSeats, numberToSelect, bookedSeats, setSeat
 const SeatSelection = ({ selectedSeats, numberToSelect, bookedSeats, setSeats }: SeatSelectionProps) => {
   return (
     <section>
-      <Card className="sm:flex sm:justify-between sm:gap-8">
-        <div className="sm:flex sm:flex-col sm:justify-between sm:min-w-48">
-          <div>
-            <Typography as="h2" variant="h2" className='mb-2'>Places</Typography>
-            <Typography as="p" variant="p" className="text-white-muted mb-1">Choisissez vos places</Typography>
-            {(numberToSelect > 0) ? (
-              <Typography as="p" variant="small" className="text-white-muted">{selectedSeats.length}/{numberToSelect} places sélectionnées</Typography>
-            ) : (
-              <Typography as="p" variant="small" className="text-red">Sélectionnez d'abord vos tickets</Typography>
-            )}
-          </div>
+      <Card className="grid sm:grid-cols-2">
+
+        <div className="">
+          <Typography as="h2" variant="h2" className='mb-2'>Places</Typography>
+          <Typography as="p" variant="p" className="text-white-muted mb-1">Choisissez vos places</Typography>
+          {(numberToSelect > 0) ? (
+            <Typography as="p" variant="small" className="text-white-muted">{selectedSeats.length}/{numberToSelect} places sélectionnées</Typography>
+          ) : (
+            <Typography as="p" variant="small" className="text-red">Sélectionnez d'abord vos tickets</Typography>
+          )}
+        </div>
+
+        <div className="mt-8 sm:mt-0 sm:row-span-2">
+          <ScreenIllustration />
+          <SeatSelectionTool 
+            selectedSeats={selectedSeats} 
+            numberToSelect={numberToSelect}
+            bookedSeats={bookedSeats} 
+            setSeats={()=>setSeats} 
+          />
+        </div>
+
+        <div className="flex items-end mb-2">
           <Legend />
         </div>
-        <SeatSelectionTool 
-          selectedSeats={selectedSeats} 
-          numberToSelect={numberToSelect}
-          bookedSeats={bookedSeats} 
-          setSeats={()=>setSeats} 
-        />
+
       </Card>
     </section>
   )
