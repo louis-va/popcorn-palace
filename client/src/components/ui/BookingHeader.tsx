@@ -1,9 +1,9 @@
-import { useState } from "react"
+import React, { useState } from "react"
+import YouTube from 'react-youtube';
 import Typography from "@/components/common/Typography"
 import Pill from "@/components/common/Pill"
 import Icon from "@/components/common/Icon"
 import Button from "@/components/common/Button"
-import Trailer from "./Trailer"
 import { formatDateToDDMM, formatTimeToHHMM } from "@/utils/date.helpers"
 
 interface BookingHeaderProps {
@@ -17,6 +17,47 @@ interface BookingHeaderProps {
 interface RatingProps {
   score: number;
 }
+
+interface TrailerProps {
+  trailerURL: string;
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Trailer = ({ trailerURL, isOpen, setIsOpen }: TrailerProps) => {
+  const handleCloseModal = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) {
+      setIsOpen(false);
+    }
+  };
+
+  if (!isOpen) {
+    document.body.style.overflow = 'auto';
+    return null;
+  }
+
+  document.body.style.overflow = 'hidden';
+
+  const opts = {
+    height: '100%',
+    width: '100%',
+    playerVars: {
+      controls: 1,
+      autoplay: 1,
+    },
+  };
+
+  return (
+    <div
+      onClick={handleCloseModal}
+      className='fixed top-0 left-0 flex justify-center items-center z-40 w-screen h-screen bg-black/80 backdrop-blur-xl p-8 md:p-12 lg:p-28'
+    >
+      <div className='aspect-video w-full'>
+        <YouTube videoId={trailerURL} className='aspect-video' iframeClassName='aspect-video' opts={opts} />
+      </div>
+    </div>
+  );
+};
 
 const Rating = ({ score }: RatingProps) => {
   const roundedScore = Math.round(score);
@@ -49,7 +90,9 @@ const BookingHeader = ({ title, date, backdrop, score, trailer }: BookingHeaderP
 
   return (
     <>
-      <Trailer trailerURL={trailer} isOpen={isTrailerOpen} setIsOpen={setIsTrailerOpen}/>
+      {(trailer) ? (
+        <Trailer trailerURL={trailer} isOpen={isTrailerOpen} setIsOpen={setIsTrailerOpen}/>
+      ): (<></>)}
       <section className="w-full flex flex-col gap-4 justify-end h-[30rem] sm:px-2 md:h-[30rem] md:flex-row md:justify-between md:items-end">
         <div className="absolute top-0 left-0 -z-10 w-full flex justify-center items-center h-[40rem] md:h-[40rem]">
           <img 
