@@ -33,7 +33,7 @@ async function addScreening(req: Request, res: Response) {
         backdrop: `https://image.tmdb.org/t/p/w1280${movieInfo.backdrop_path}`,
         trailer: videos.results
           .filter((video: any) => video.type === "Trailer" && video.site === "YouTube") // filter the array to have only trailers from youtube
-          .map((video: any) => `https://www.youtube.com/embed/${video.key}`) // returns only the url of the video
+          .map((video: any) => video.key) // returns only the key of the video
           .slice(0, 1).join(''), // returns only the first trailer
         score: movieInfo.vote_average,
         length: movieInfo.runtime,
