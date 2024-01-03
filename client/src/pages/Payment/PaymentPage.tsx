@@ -2,13 +2,14 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IScreening, IBooking } from '@/types/types';
 import { fetchScreening } from '@/services/screening/fetchScreening.service';
-import Container from "@/components/layout/Container"
-import Nav from "@/components/layout/Nav"
+import Container from "@/components/layout/Container";
+import Nav from "@/components/layout/Nav";
 import AuthModal from "@/components/auth/AuthModal";
 import Footer from "@/components/layout/Footer";
 import BookingHeader from '@/components/ui/BookingHeader';
 import BookingSteps from '@/components/ui/BookingSteps';
 import BookingSummary from '@/components/ui/BookingSummary';
+import LoginStatus from './LoginStatus';
 
 const Screening = () => {
   const navigate = useNavigate();
@@ -54,7 +55,7 @@ const Screening = () => {
         
         <div className="grid grid-cols-3 gap-4 mt-12">
           <div className="flex flex-col gap-4 col-span-3 order-2 lg:col-span-2 lg:row-span-3 lg:order-1">
-            
+            <LoginStatus />
           </div>
 
           <div className="col-span-3 order-1 lg:col-span-1 lg:order-2">
@@ -65,6 +66,7 @@ const Screening = () => {
             <BookingSummary
               booking={bookingData!}
               buttonLabel="Payer"
+              disabled={true}
               buttonAction={() => {console.log("next")}}
             />
           </div>
