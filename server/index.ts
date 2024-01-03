@@ -42,7 +42,7 @@ app.use(
     name: "session",
     keys: [COOKIE_SECRET!],
     httpOnly: true,
-    sameSite: (process.env.ENV === 'production') ? "lax" : "strict",
+    sameSite: (process.env.ENV === 'production') ? "none" : "strict",
     secure: process.env.ENV === 'production',
     maxAge: 30 * 24 * 60 * 60 * 1000 // 30 days
   })

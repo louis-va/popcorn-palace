@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { IScreening, IBooking, ITicket } from '@/types/types';
 import { fetchScreening } from '@/services/screening/fetchScreening.service';
 import Container from "@/components/layout/Container"
@@ -23,6 +23,20 @@ const Screening = () => {
     tickets: [],
     seats: []
   });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const screeningData = await fetchScreening(id!);
+        setScreeningData(screeningData);
+        setLoading(false);
+      } catch (error: any) {
+        setLoading(false);
+      }
+    };
+  
+    fetchData();
+  }, [id]);
 
   const setTickets = (tickets: ITicket[]) => {
     // remove a seat if a ticket is removed
@@ -48,19 +62,16 @@ const Screening = () => {
     })
   }
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const screeningData = await fetchScreening(id!);
-        setScreeningData(screeningData);
-        setLoading(false);
-      } catch (error: any) {
-        setLoading(false);
-      }
-    };
-  
-    fetchData();
-  });
+  const saveBookingDataToLocalStorage = () => {
+    localStorage.setItem('bookingData', JSON.stringify(bookingData));
+  }
+
+  const navigate = useNavigate();
+
+  const goToPaymentPage = () => {
+    saveBookingDataToLocalStorage()
+    navigate('/payment');
+  };
 
   if (loading || !screeningData) return null;
 
@@ -102,7 +113,7 @@ const Screening = () => {
             <BookingSummary
               booking={bookingData}
               buttonLabel="Suivant"
-              buttonAction={() => {console.log("next")}}
+              buttonAction={goToPaymentPage}
             />
           </div>
         </div>

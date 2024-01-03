@@ -90,8 +90,10 @@ const SeatSelectionTool = ({ selectedSeats, numberToSelect, bookedSeats, setSeat
   const cols = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
   const addSeat = (seat: string) => {
-    selectedSeats.push(seat)
-    setSeats(selectedSeats)
+    setSeats([
+      ...selectedSeats,
+      seat
+    ])
   }
 
   const removeSeat = (seat: string) => {
@@ -145,7 +147,7 @@ const SeatSelection = ({ selectedSeats, numberToSelect, bookedSeats, setSeats }:
             selectedSeats={selectedSeats} 
             numberToSelect={numberToSelect}
             bookedSeats={bookedSeats} 
-            setSeats={()=>setSeats} 
+            setSeats={setSeats} 
           />
         </div>
 
