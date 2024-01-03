@@ -1,10 +1,11 @@
-import { IBooking, ITicket } from '@/types/types';
+import { IBooking } from '@/types/types';
 import Typography from "../common/Typography";
 import Button from '../common/Button';
 
 interface BookingSummaryProps {
   booking: IBooking;
   buttonLabel?: string;
+  disabled: boolean;
   buttonAction?: () => void;
 }
 
@@ -12,12 +13,6 @@ interface BookingSummaryTableRowProps {
   rate: string;
   price: number;
   seat: string | null;
-}
-
-function validateTickets(tickets: ITicket[]) {
-  return tickets.every(ticket =>
-    Object.values(ticket).every(value => value !== undefined && value !== null && value !== '')
-  );
 }
 
 const BookingSummaryTableHead = () => {
@@ -52,10 +47,9 @@ const BookingSummaryTableRow = ({ rate, price, seat }: BookingSummaryTableRowPro
   )
 }
 
-const BookingSummary = ({ booking, buttonLabel, buttonAction }: BookingSummaryProps) => {
+const BookingSummary = ({ booking, buttonLabel, disabled, buttonAction }: BookingSummaryProps) => {
   const isBookingEmpty = (booking?.tickets.length == 0)
   const total = (!isBookingEmpty) ? booking.tickets.reduce((sum, ticket) => sum + ticket.price, 0) : 0;
-  const isBookingValid = (!isBookingEmpty) && validateTickets(booking.tickets) && booking.tickets.length == booking.seats.length
 
   return (
     <section className="w-full rounded-lg border bg-white/5 border-white/5 backdrop-blur">
@@ -93,7 +87,7 @@ const BookingSummary = ({ booking, buttonLabel, buttonAction }: BookingSummaryPr
             <Button 
               type="button" 
               variant="primary" 
-              disabled={!isBookingValid}
+              disabled={disabled}
               onClick={buttonAction}
             >
               {buttonLabel}

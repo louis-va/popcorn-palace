@@ -15,6 +15,7 @@ import SeatSelection from './SeatSelection';
 
 const Screening = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [loading, setLoading] = useState<boolean>(true);
   const [screeningData, setScreeningData] = useState<IScreening | null>(null);
@@ -66,8 +67,6 @@ const Screening = () => {
     localStorage.setItem('bookingData', JSON.stringify(bookingData));
   }
 
-  const navigate = useNavigate();
-
   const goToPaymentPage = () => {
     saveBookingDataToLocalStorage()
     navigate('/payment');
@@ -113,6 +112,10 @@ const Screening = () => {
             <BookingSummary
               booking={bookingData}
               buttonLabel="Suivant"
+              disabled={
+                (bookingData?.tickets.length == 0) || 
+                (bookingData.tickets.length != bookingData.seats.length)
+              }
               buttonAction={goToPaymentPage}
             />
           </div>
