@@ -3,6 +3,7 @@ import { ILoginData, IUserData, IAuthContext, ISignUpData } from '@/types/types'
 import { login } from '@/services/auth/login.service';
 import { refresh } from '@/services/auth/refresh.service';
 import { signUp } from '@/services/auth/signup.service';
+import { logout } from '@/services/auth/logout.service';
 
 interface AuthProviderProps {
   children: React.ReactNode
@@ -49,8 +50,15 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   }
 
-  const handleLogout = () => {
-    setIsLoggedIn(false);
+  const handleLogout = async () => {
+    try {  
+      const response = await logout();
+      setUserData(undefined);
+      setIsLoggedIn(false);
+      return response
+    } catch (error: any) {
+      setIsLoggedIn(false);
+    }
   };
 
   const authValues: IAuthContext = {
