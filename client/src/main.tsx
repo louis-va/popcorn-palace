@@ -7,6 +7,7 @@ import { AuthProvider } from '@/auth/AuthContext';
 import Home from "@/pages/Home/HomePage"
 import Screening from "@/pages/Screening/ScreeningPage";
 import Payment from "@/pages/Payment/PaymentPage";
+import Confirmation from '@/pages/Confirmation/ConfirmationPage';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -14,6 +15,7 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path="screenings/:movie_name/:id" element={<Screening />} />
       <Route path="payment" element={<Payment />} />
+      <Route path="payment/confirmation" element={<Confirmation />} />
     </Route>
   )
 );
