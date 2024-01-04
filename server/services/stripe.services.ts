@@ -49,8 +49,10 @@ async function createCheckoutSession(items: ITicket[], bookingId: string, succes
 }
 
 // Retrieve checkout session details and check status
-async function checkPaymentStatus(sessionId: string) {
+async function checkPaymentStatus(sessionId: string | undefined) {
   const stripe = new stripePackage(STRIPE_API_KEY!);
+
+  if(!sessionId) return false;
 
   const retrievedSession = await stripe.checkout.sessions.retrieve(sessionId);
   return retrievedSession.payment_status === 'paid';

@@ -43,4 +43,26 @@ async function checkSeatsDisponibility(req:Request, res: Response, next: NextFun
   }
 }
 
-export default { validateSeats, checkSeatsDisponibility };
+// Check if booking exists
+async function checkBookingId(req:Request, res: Response, next: NextFunction) {
+  try {
+    const bookingId = req.params.id
+    const booking = await Booking.findById(bookingId)
+
+    if (!booking || !booking.stripe_session_id) {
+      res.status(403).send({ message: "Invalid Booking ID" });
+      return;
+    }
+
+    next();
+    return;
+  } catch(err: any) {
+    if (err.name === "CastError") {
+      res.status(403).json({ error: 'Invalid Booking ID' });
+      return;
+    }
+    res.status(500).send({ message: err.message || "Some error occurred while validating booking Id." });
+  }
+}
+
+export default { validateSeats, checkSeatsDisponibility, checkBookingId };

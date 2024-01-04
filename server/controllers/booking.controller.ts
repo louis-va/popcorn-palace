@@ -45,11 +45,8 @@ async function createBooking(req: AuthenticatedRequest, res: Response) {
 // Create a new booking
 async function validateBooking(req: AuthenticatedRequest, res: Response) {
   try {
-    const bookingId = req.body.booking_id
+    const bookingId = req.params.id
     const booking = await Booking.findById(bookingId)
-    if (!booking || !booking.stripe_session_id) {
-      throw new Error('Invalid booking')
-    }
 
     const isPaymentValid = await checkPaymentStatus(booking?.stripe_session_id)
     
