@@ -29,6 +29,7 @@ npm install
 ##### `client/.env`
 ```ini
 VITE_API_URL='' # URL of the server. By default: http://localhost:8000
+VITE_URL='' # URL of the client. By default: http://localhost:3000
 ```
 
 ##### `server/.env`
@@ -75,7 +76,7 @@ docker compose up -d
 ```
 
 #### Deployment
-To deploy the site in production, in `/client/.env.production`, set `VITE_API_URL` as your database URL. Additionally, configure the `allowedOrigins` in `/server/index.ts` to allow your client's URL to connect to the server.
+To deploy the site in production, in `/client/.env.production`, set `VITE_API_URL` as your server URL and `VITE_URL` as your client URL. Additionally, configure the `allowedOrigins` in `/server/index.ts` to allow your client's URL to connect to the server.
 
 ### 🌐 Ports
 **Client**: http://localhost:3000 <br>
