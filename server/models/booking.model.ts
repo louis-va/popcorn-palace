@@ -3,7 +3,7 @@ import { IScreening } from './screening.model';
 import { IUser } from './user.model';
 
 interface ITicket {
-  rate: "Adulte" | "Étudiant" | "Réduit",
+  rate: "Normal" | "Étudiant" | "Réduit",
   amount: number
 }
 
@@ -19,7 +19,7 @@ interface IBooking extends Document {
 const TicketSchema = new Schema({
   rate: {
     type: String,
-    enum: ["Adulte", "Étudiant", "Réduit"]
+    enum: ["Normal", "Étudiant", "Réduit"]
   },
   amount: Number
 })
@@ -41,4 +41,4 @@ const BookingSchema = new Schema({
 
 const Booking: Model<IBooking> = mongoose.model<IBooking>('Booking', BookingSchema);
 
-export { IBooking, Booking }
+export { ITicket, IBooking, Booking }
