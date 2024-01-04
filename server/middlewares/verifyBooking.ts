@@ -31,7 +31,8 @@ async function checkSeatsDisponibility(req:Request, res: Response, next: NextFun
   
     const booking = await Booking.findOne({
       seats: { $in: seats },
-      screening_id: screeningId
+      screening_id: screeningId,
+      payment_status: true
     })
     
     if (booking) {
