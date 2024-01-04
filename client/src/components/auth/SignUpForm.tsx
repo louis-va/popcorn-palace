@@ -3,7 +3,6 @@ import { useAuth } from "@/auth/useAuth";
 import Input from "@/components/forms/Input";
 import Form from "../forms/Form";
 import Button from "@/components/common/Button";
-import Card from "../common/Card";
 import Typography from "../common/Typography";
 import Icon from "../common/Icon";
 import { IInputField } from "@/types/types";
@@ -92,10 +91,10 @@ const SignUpForm = () => {
 
   if (isSignUpSuccessful) {
     return (
-      <Card size="small" className="flex gap-2">
+      <div className="flex gap-2 p-2 border-2 border-white/10 border-dashed rounded">
         <div><Icon name='success' className="w-5 h-5"/></div>
-        <Typography as="p" variant="h4">Votre compte a été créé. Vous pouvez vous connecter.</Typography>
-      </Card>
+        <Typography as="p" variant="p">Votre compte a été créé. Vous pouvez vous connecter.</Typography>
+      </div>
     )
   }
 
