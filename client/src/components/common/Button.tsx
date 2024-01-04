@@ -41,8 +41,19 @@ const Button = ({ type="button", variant, size, disabled, loading, onClick, chil
   }  
 
   return (
-    <button type={type} disabled={isDisabled} onClick={onClick} className={`rounded-full inline-flex justify-center items-center ${className}`}>
-      {(loading) ? <Icon name='spinner' className={`${(size==='small') ? 'w-5 h-5' : 'w-6 h-6'} animate-spin`}/> : children}
+    <button 
+      type={type} 
+      disabled={isDisabled} 
+      onClick={onClick} 
+      className={`rounded-full inline-flex justify-center items-center active:scale-[.97] ${className}`}
+    >
+      {(loading) ? 
+        <Icon 
+          name='spinner' 
+          className={`${(size==='small') ? 'w-5 h-5' : 'w-6 h-6'} animate-spin`}
+        /> 
+        : children
+      }
     </button>
   );
 };
