@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { IBooking } from '@/types/types';
 import Typography from "../common/Typography";
 import Button from '../common/Button';
@@ -48,8 +49,18 @@ const BookingSummaryTableRow = ({ rate, price, seat }: BookingSummaryTableRowPro
 }
 
 const BookingSummary = ({ booking, buttonLabel, disabled, buttonAction }: BookingSummaryProps) => {
+  const [isLoading, setIsLoading] = useState(false)
   const isBookingEmpty = (booking?.tickets.length == 0)
   const total = (!isBookingEmpty) ? booking.tickets.reduce((sum, ticket) => sum + ticket.price, 0) : 0;
+
+  const handleOnClick = async () => {
+    setIsLoading(true)
+    try {
+      if (buttonAction) await buttonAction();
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   return (
     <section className="w-full rounded-lg border bg-white/5 border-white/5 backdrop-blur">
@@ -88,7 +99,8 @@ const BookingSummary = ({ booking, buttonLabel, disabled, buttonAction }: Bookin
               type="button" 
               variant="primary" 
               disabled={disabled}
-              onClick={buttonAction}
+              loading={isLoading}
+              onClick={handleOnClick}
             >
               {buttonLabel}
             </Button>
