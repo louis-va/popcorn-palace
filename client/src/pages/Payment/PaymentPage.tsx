@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../../auth/useAuth";
 import { IScreening, IBooking } from '@/types/types';
 import { fetchScreening } from '@/services/screening/fetchScreening.service';
+import { openBookingCheckout } from '@/services/booking/openBookingCheckout.service';
 import Container from "@/components/layout/Container";
 import Nav from "@/components/layout/Nav";
 import AuthModal from "@/components/auth/AuthModal";
@@ -71,7 +72,7 @@ const Payment = () => {
               booking={bookingData!}
               buttonLabel="Payer"
               disabled={!isLoggedIn}
-              buttonAction={() => {console.log("next")}}
+              buttonAction={async () => {await openBookingCheckout(bookingData)}}
             />
           </div>
         </div>
