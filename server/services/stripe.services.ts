@@ -23,13 +23,12 @@ const stripeItemIds = [
 ]
 
 function findPriceId(rate: 'Normal' | 'Étudiant' | 'Réduit') {
-  stripeItemIds.forEach((item) => {
-    if (item.rate === rate) return item.priceId
-  })
-  return ''
+  const foundItem = stripeItemIds.find((item) => item.rate === rate);
+  return foundItem ? foundItem.priceId : '';
 }
 
-async function createCheckoutSession(items: ITicket[], successUrl: string, cancelUrl: string) {
+// Create a Stripe checkout session and redirects to the payment page
+async function createCheckoutSession(items: ITicket[], bookingId: string, successUrl: string, cancelUrl: string) {
   const stripe = new stripePackage(STRIPE_API_KEY!);
 
   const stripeItems = items.map((item) => {
@@ -42,13 +41,19 @@ async function createCheckoutSession(items: ITicket[], successUrl: string, cance
   const session = await stripe.checkout.sessions.create({
     line_items: stripeItems,
     mode: 'payment',
-    success_url: `${successUrl}?success=true`,
+    success_url: `${successUrl}?success=true&booking_id=${bookingId}&session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${cancelUrl}?canceled=true`,
   });
 
   return session
-
-  // res.redirect(303, session.url);
 }
 
-export { createCheckoutSession }
+// Retrieve checkout session details and check status
+async function checkPaymentStatus(sessionId: string) {
+  const stripe = new stripePackage(STRIPE_API_KEY!);
+
+  const retrievedSession = await stripe.checkout.sessions.retrieve(sessionId);
+  return retrievedSession.payment_status === 'paid';
+}
+
+export { createCheckoutSession, checkPaymentStatus }
