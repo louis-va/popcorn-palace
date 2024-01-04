@@ -33,6 +33,9 @@ async function createBooking(req: AuthenticatedRequest, res: Response) {
 
     const bookingId = await addBooking(booking)
     const stripeSession = await createCheckoutSession(booking.tickets, bookingId, req.body.success_url, req.body.cancel_url)
+    
+    await Booking.findOneAndUpdate({ _id: bookingId }, { $set: { stripe_session_id: stripeSession.id } });
+
     res.redirect(303, stripeSession.url!);
   } catch (err: any) {
     res.status(500).send({ message: err });
@@ -43,9 +46,13 @@ async function createBooking(req: AuthenticatedRequest, res: Response) {
 async function validateBooking(req: AuthenticatedRequest, res: Response) {
   try {
     const bookingId = req.body.booking_id
-    const stripeSessionId = req.body.session_id
+    const booking = await Booking.findById(bookingId)
+    if (!booking || !booking.stripe_session_id) {
+      throw new Error('Invalid booking')
+    }
 
-    const isPaymentValid = await checkPaymentStatus(stripeSessionId)
+    const isPaymentValid = await checkPaymentStatus(booking?.stripe_session_id)
+    
     let emailSent = false
     
     if (isPaymentValid) {

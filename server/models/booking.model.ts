@@ -14,7 +14,8 @@ interface IBooking extends Document {
   qr_code: string,
   tickets: ITicket[],
   price: number,
-  payment_status: boolean
+  payment_status: boolean,
+  stripe_session_id: string
 }
 
 const TicketSchema = new Schema({
@@ -38,7 +39,8 @@ const BookingSchema = new Schema({
   qr_code: String,
   tickets: [TicketSchema],
   price: Number,
-  payment_status: Boolean
+  payment_status: Boolean,
+  stripe_session_id: String
 });
 
 const Booking: Model<IBooking> = mongoose.model<IBooking>('Booking', BookingSchema);
