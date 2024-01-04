@@ -39,6 +39,7 @@ JWT_SECRET='' # Secure string of characters.
 COOKIE_SECRET='' # Secure string of characters.
 TMDB_API_KEY='' # TMDB API Key. https://www.themoviedb.org/settings/api
 RESEND_API_KEY='' # Resend API Key. https://resend.com/api-keys
+STRIPE_API_KEY='' # Stripe Secret Key (starts with 'sk_'). https://dashboard.stripe.com/apikeys
 ```
 
 ### 🚀 Execution
