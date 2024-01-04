@@ -28,8 +28,8 @@ app.use(helmet());
 
 // Allow requests from multiple origins
 app.use(cors({
-  origin: "http://localhost:3000",
-  credentials: true,
+  origin: ["http://localhost:3000"],
+  credentials: true
 }));
 
 // Parse incoming requests

@@ -41,7 +41,7 @@ async function createCheckoutSession(items: ITicket[], bookingId: string, succes
   const session = await stripe.checkout.sessions.create({
     line_items: stripeItems,
     mode: 'payment',
-    success_url: `${successUrl}?success=true&bookingid=${bookingId}&sessionid={CHECKOUT_SESSION_ID}`,
+    success_url: `${successUrl}?success=true&bookingid=${bookingId}`,
     cancel_url: `${cancelUrl}?canceled=true`,
   });
 

@@ -36,7 +36,7 @@ async function createBooking(req: AuthenticatedRequest, res: Response) {
     
     await Booking.findOneAndUpdate({ _id: bookingId }, { $set: { stripe_session_id: stripeSession.id } });
 
-    res.redirect(303, stripeSession.url!);
+    res.status(200).json({url: stripeSession.url})
   } catch (err: any) {
     res.status(500).send({ message: err });
   }

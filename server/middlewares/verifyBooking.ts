@@ -7,7 +7,7 @@ const Booking = database.booking;
 function validateSeats(req:Request, res: Response, next: NextFunction) {
   try {
     const seats = req.body.seats
-    const regex = /^[A-I]([1-9]|10|11)$/; // Regular expression to match seats criteria
+    const regex = /^[A-K]([1-9])$/; // Regular expression to match seats criteria
   
     for (let i = 0; i < seats.length; i++) {
       if (!regex.test(seats[i])) {
@@ -27,8 +27,12 @@ function validateSeats(req:Request, res: Response, next: NextFunction) {
 async function checkSeatsDisponibility(req:Request, res: Response, next: NextFunction) {
   try {
     const seats = req.body.seats
+    const screeningId = req.body.screening_id
   
-    const booking = await Booking.findOne({ seats: { $in: seats } })
+    const booking = await Booking.findOne({
+      seats: { $in: seats },
+      screening_id: screeningId
+    })
     
     if (booking) {
       res.status(400).send({ message: `One of the seats is already taken` });

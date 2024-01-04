@@ -75,9 +75,10 @@ async function getOneScreening(req: Request, res: Response) {
     const screening = await Screening.findById(screeningId)
 
     // Get booked seats
-    const bookings = await Booking.find({ screening_id: screeningId }, 'seats')
+    const bookings = await Booking.find({ screening_id: screeningId }, 'seats payment_status')
     if (bookings.length > 0) {
-      screening!.bookedSeats = bookings.map(booking => booking.seats).flat(1);
+      // set an array of seats that are booked and paid
+      screening!.bookedSeats = bookings.map(booking => (booking.payment_status) ? booking.seats : []).flat(1);
     } else {
       screening!.bookedSeats = []
     }
