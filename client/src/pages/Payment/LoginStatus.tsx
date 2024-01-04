@@ -17,10 +17,13 @@ const LoginStatus = () => {
   const loggedInContent = (
     <>
       <Typography as="h2" variant="h2" className="mb-2">
-        Vous êtes connecté avec le compte {userData?.firstname} {userData?.lastname}
+        Vous êtes connecté
+      </Typography>
+      <Typography as="p" variant="p" className="text-white-muted mb-1">
+        Utilisateur : <span className="text-white">{userData?.firstname} {userData?.lastname}</span>
       </Typography>
       <Typography as="p" variant="p" className="text-white-muted mb-6">
-        Vos tickets seront envoyés à l'adresse email : <span className="text-white">{userData?.email}</span>.
+        Email : <span className="text-white">{userData?.email}</span>
       </Typography>
       <Button type="button" loading={isLogoutLoading} variant="tertiary" size="small" onClick={handleSwitchAccount}>Changer de compte</Button>
     </>
@@ -28,7 +31,12 @@ const LoginStatus = () => {
 
   const loggedOutContent = (
     <>
-      <Typography as="h2" variant="h2" className="mb-6">Connectez-vous ou créez un compte pour réserver une séance.</Typography>
+      <Typography as="h2" variant="h2" className="mb-2">
+        Vous n'êtes pas connecté
+      </Typography>
+      <Typography as="p" variant="p" className="text-white-muted mb-6">
+        Connectez-vous ou créez un compte pour réserver votre séance.
+      </Typography>
       <Button className="mr-2" type="button" variant="secondary" size="small" onClick={()=>setIsAuthModalOpen(true)}>Connexion</Button>
       <Button type="button" variant="tertiary" size="small" onClick={()=>setIsAuthModalOpen(true)}>Inscription</Button>
     </>

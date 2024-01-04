@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from "../../auth/useAuth";
 import { IScreening, IBooking } from '@/types/types';
 import { fetchScreening } from '@/services/screening/fetchScreening.service';
 import Container from "@/components/layout/Container";
@@ -10,13 +11,15 @@ import BookingHeader from '@/components/ui/BookingHeader';
 import BookingSteps from '@/components/ui/BookingSteps';
 import BookingSummary from '@/components/ui/BookingSummary';
 import LoginStatus from './LoginStatus';
+import PaymentInfo from './PaymentInfo';
 
-const Screening = () => {
+const Payment = () => {
   const navigate = useNavigate();
 
+  const { isLoggedIn } = useAuth();
   const [loading, setLoading] = useState<boolean>(true);
   const [screeningData, setScreeningData] = useState<IScreening | null>(null);
-  
+
   const bookingDataString: string | null = localStorage.getItem('bookingData');
   let bookingData: IBooking
 
@@ -38,7 +41,7 @@ const Screening = () => {
     };
   
     fetchScreeningData();
-  });
+  }, []);
 
   if (loading || !screeningData) return null;
 
@@ -56,6 +59,7 @@ const Screening = () => {
         <div className="grid grid-cols-3 gap-4 mt-12">
           <div className="flex flex-col gap-4 col-span-3 order-2 lg:col-span-2 lg:row-span-3 lg:order-1">
             <LoginStatus />
+            <PaymentInfo />
           </div>
 
           <div className="col-span-3 order-1 lg:col-span-1 lg:order-2">
@@ -66,7 +70,7 @@ const Screening = () => {
             <BookingSummary
               booking={bookingData!}
               buttonLabel="Payer"
-              disabled={true}
+              disabled={!isLoggedIn}
               buttonAction={() => {console.log("next")}}
             />
           </div>
@@ -78,4 +82,4 @@ const Screening = () => {
   )
 }
 
-export default Screening
+export default Payment
