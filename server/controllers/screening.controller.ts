@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import slugify from 'slugify';
 
-import { getCasting, getVideos, getMovieInfo } from '../services/tmdbService'
+import { getCasting, getVideos, getMovieInfo } from '../services/tmdb.services'
 import database from '../models';
 const Screening = database.screening;
 const Booking = database.booking;
