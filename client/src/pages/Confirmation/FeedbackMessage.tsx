@@ -2,20 +2,22 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../../auth/useAuth";
 import Card from "@/components/common/Card";
 import Typography from "@/components/common/Typography"
+import Button from "@/components/common/Button";
 import { checkBookingStatus } from "@/services/booking/checkBookingStatus.service";
 
 interface FeedbackMessageProps {
-  bookingId: string;
+  bookingId: string | null;
+  success: string | null;
 }
 
-const FeedbackMessage = ({ bookingId }: FeedbackMessageProps) => {
+const FeedbackMessage = ({ bookingId, success }: FeedbackMessageProps) => {
   const { isLoggedIn } = useAuth();
   const [validatePaymentResponse, setValidatePaymentResponse] = useState<any>(null)
 
   useEffect(() => {
     const fetchScreeningData = async () => {
       try {
-        if (isLoggedIn) {
+        if (isLoggedIn && bookingId) {
           const response = await checkBookingStatus(bookingId);
           const json = await response.json()
           setValidatePaymentResponse(json);
@@ -28,7 +30,18 @@ const FeedbackMessage = ({ bookingId }: FeedbackMessageProps) => {
     fetchScreeningData();
   }, [isLoggedIn, bookingId]);
 
-  if (!isLoggedIn || !validatePaymentResponse) {
+  if (success==='false') {
+    return (
+      <Card className="backdrop-blur">
+        <Typography as="h2" variant="h2" className="mb-2">
+          Une erreur s'est produite lors du paiement
+        </Typography>
+        <Typography as="p" variant="p" className="text-white-muted">
+          Veuillez réessayer ou nous contacter.
+        </Typography>
+      </Card>
+    )
+  } else if (!isLoggedIn || !validatePaymentResponse) {
     return (
       <Card className="backdrop-blur">
         <Typography as="h2" variant="h2">
@@ -42,13 +55,14 @@ const FeedbackMessage = ({ bookingId }: FeedbackMessageProps) => {
         <Typography as="h2" variant="h2" className="mb-2">
           Merci, votre séance est réservée!
         </Typography>
-        <Typography as="p" variant="p" className="text-white-muted">
+        <Typography as="p" variant="p" className="text-white-muted mb-4">
         {(validatePaymentResponse.emailSent) ? (
           "Vous pouvez retrouver vos tickets dans votre espace personnel ou dans l'email de confirmation."
         ) : (
           'Vous pouvez retrouver vos tickets dans votre espace personnel.'
         )}
         </Typography>
+        <Button type="button" variant="secondary" size="small">Voir mes tickets</Button>
       </Card>
     )
   } else {

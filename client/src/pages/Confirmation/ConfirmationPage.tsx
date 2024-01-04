@@ -18,7 +18,8 @@ const Confirmation = () => {
   const [screeningData, setScreeningData] = useState<IScreening | null>(null);
   const [searchParams] = useSearchParams();
 
-  const bookingId = searchParams.get("bookingid");
+  const bookingId = searchParams.get("bookingid") ? searchParams.get("bookingid") : null;
+  const success = searchParams.get("success") ? searchParams.get("success") : null;
 
   const bookingDataString: string | null = localStorage.getItem('bookingData');
   let bookingData: IBooking
@@ -43,7 +44,7 @@ const Confirmation = () => {
     fetchScreeningData();
   }, []);
 
-  if (loading || !screeningData || !bookingId) return null;
+  if (loading || !screeningData) return null;
 
   return (
     <>
@@ -58,7 +59,7 @@ const Confirmation = () => {
         
         <div className="grid grid-cols-3 gap-4 mt-12">
           <div className="flex flex-col gap-4 col-span-3 order-2 lg:col-span-2 lg:row-span-3 lg:order-1">
-            <FeedbackMessage bookingId={bookingId} />
+            <FeedbackMessage bookingId={bookingId!} success={success!} />
           </div>
 
           <div className="col-span-3 order-1 lg:col-span-1 lg:order-2">

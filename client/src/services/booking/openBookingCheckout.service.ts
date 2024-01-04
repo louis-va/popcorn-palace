@@ -51,8 +51,7 @@ export const openBookingCheckout = async (data: IBooking) => {
     if(response.ok) {
       window.location.href = body.url
     } else {
-      console.log(body)
-      //window.location.href = `${import.meta.env.VITE_URL}/payment/confirmation?success=false`
+      window.location.href = `${import.meta.env.VITE_URL}/payment/confirmation?success=false`
     }
   } catch (error: any) {
     throw new Error(error.message || 'An error occured during checkout');
