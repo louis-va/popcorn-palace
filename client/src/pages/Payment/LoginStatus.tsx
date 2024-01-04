@@ -19,11 +19,9 @@ const LoginStatus = () => {
       <Typography as="h2" variant="h2" className="mb-2">
         Vous êtes connecté
       </Typography>
-      <Typography as="p" variant="p" className="text-white-muted mb-1">
-        Utilisateur : <span className="text-white">{userData?.firstname} {userData?.lastname}</span>
-      </Typography>
       <Typography as="p" variant="p" className="text-white-muted mb-6">
-        Email : <span className="text-white">{userData?.email}</span>
+        Vous êtes connecté au compte <span className="text-white">{userData?.firstname} {userData?.lastname}</span>. 
+        L'email de confirmation sera envoyé à l'adresse <span className="text-white">{userData?.email}</span>.
       </Typography>
       <Button type="button" loading={isLogoutLoading} variant="tertiary" size="small" onClick={handleSwitchAccount}>Changer de compte</Button>
     </>

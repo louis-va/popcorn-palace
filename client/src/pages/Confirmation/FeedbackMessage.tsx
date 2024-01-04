@@ -28,43 +28,41 @@ const FeedbackMessage = ({ bookingId }: FeedbackMessageProps) => {
     fetchScreeningData();
   }, [isLoggedIn, bookingId]);
 
-  if (!isLoggedIn || !validatePaymentResponse) return null
-
-  const PaymentSuccessfullContent = (
-    <Card className="backdrop-blur">
-      <Typography as="h2" variant="h2" className="mb-2">
-        Merci, votre séance est réservée!
-      </Typography>
-      <Typography as="p" variant="p" className="text-white-muted">
-      {(validatePaymentResponse.emailSent) ? (
-        "Vous pouvez retrouver vos tickets dans votre espace personnel ou dans l'email de confirmation."
-      ) : (
-        'Vous pouvez retrouver vos tickets dans votre espace personnel.'
-      )}
-      </Typography>
-    </Card>
-  )
-
-  const PaymentErrorContent = (
-    <Card className="backdrop-blur">
-      <Typography as="h2" variant="h2" className="mb-2">
-        Une erreur s'est produite lors du paiement
-      </Typography>
-      <Typography as="p" variant="p" className="text-white-muted">
-        Veuillez réessayer ou nous contacter.
-      </Typography>
-    </Card>
-  )
-  
-  return (
-    <section>
-      {(validatePaymentResponse.isPaymentValid) ? (
-        PaymentSuccessfullContent
-      ): (
-        PaymentErrorContent
-      )}
-    </section>
-  )
+  if (!isLoggedIn || !validatePaymentResponse) {
+    return (
+      <Card className="backdrop-blur">
+        <Typography as="h2" variant="h2">
+          Validation de la commande...
+        </Typography>
+      </Card>
+    )
+  } else if (validatePaymentResponse.isPaymentValid) {
+    return (
+      <Card className="backdrop-blur">
+        <Typography as="h2" variant="h2" className="mb-2">
+          Merci, votre séance est réservée!
+        </Typography>
+        <Typography as="p" variant="p" className="text-white-muted">
+        {(validatePaymentResponse.emailSent) ? (
+          "Vous pouvez retrouver vos tickets dans votre espace personnel ou dans l'email de confirmation."
+        ) : (
+          'Vous pouvez retrouver vos tickets dans votre espace personnel.'
+        )}
+        </Typography>
+      </Card>
+    )
+  } else {
+    return (
+      <Card className="backdrop-blur">
+        <Typography as="h2" variant="h2" className="mb-2">
+          Une erreur s'est produite lors du paiement
+        </Typography>
+        <Typography as="p" variant="p" className="text-white-muted">
+          Veuillez réessayer ou nous contacter.
+        </Typography>
+      </Card>
+    )
+  }
 }
 
 export default FeedbackMessage
