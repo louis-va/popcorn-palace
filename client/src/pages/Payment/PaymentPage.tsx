@@ -85,7 +85,7 @@ const Payment = () => {
             <BookingSteps step={2} />
             <Countdown 
               createdDate={bookingData.created_dt!} 
-              timoutRedirectUrl={`/screenings/${screeningData.slug}`}
+              timoutRedirectUrl={`/screenings/${screeningData.slug}/${bookingData.screening_id}`}
             />
           </div>
 
