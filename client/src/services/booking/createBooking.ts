@@ -3,17 +3,18 @@ import { IBooking, ITicket } from '@/types/types';
 interface ITicketAPI {
   rate: string;
   amount: number;
+  price: number;
 }
 
 // Transform ITicket[] array to an ITicketAPI[] array
-const transformTicketArrayForAPI = (ticketArray: ITicket[]) => {
+const transformTicketToTicketAPI = (ticketArray: ITicket[]) => {
   const transformedArray = ticketArray.reduce((acc: ITicketAPI[], item) => {
     const foundIndex = acc.findIndex((el: ITicketAPI) => el.rate === item.rate);
   
     if (foundIndex !== -1) {
       acc[foundIndex].amount++;
     } else {
-      acc.push({ rate: item.rate, amount: 1 });
+      acc.push({ rate: item.rate, amount: 1, price: item.price});
     }
   
     return acc;
@@ -21,7 +22,7 @@ const transformTicketArrayForAPI = (ticketArray: ITicket[]) => {
   return transformedArray;
 }
 
-export const openBookingCheckout = async (data: IBooking) => {
+export const createBooking = async (data: IBooking) => {
   try {
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
@@ -29,10 +30,8 @@ export const openBookingCheckout = async (data: IBooking) => {
     const payload = JSON.stringify({
       "screening_id": data.screening_id,
       "seats": data.seats,
-      "tickets": transformTicketArrayForAPI(data.tickets),
-      "price": data.tickets.reduce((sum, ticket) => sum + ticket.price, 0),
-      "success_url": `${import.meta.env.VITE_URL}/payment/confirmation`,
-      "cancel_url": `${import.meta.env.VITE_URL}/payment`
+      "tickets": transformTicketToTicketAPI(data.tickets),
+      "price": data.tickets.reduce((sum, ticket) => sum + ticket.price, 0)
     });
 
     const options = {
@@ -45,15 +44,16 @@ export const openBookingCheckout = async (data: IBooking) => {
     // Simulating a 1 seconds delay
     await new Promise(resolve => setTimeout(resolve, 1000));
     
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/bookings/checkout`, options);
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/bookings/create`, options);
     const body = await response.json();
-    
+
     if(response.ok) {
-      window.location.href = body.url
+      return body.booking_id
     } else {
-      window.location.href = `${import.meta.env.VITE_URL}/payment/confirmation?success=false`
-    }
+      throw new Error('An error occured during booking creation');
+    } 
+
   } catch (error: any) {
-    throw new Error(error.message || 'An error occured during checkout');
+    throw new Error(error.message || 'An error occured during booking creation');
   }
 };

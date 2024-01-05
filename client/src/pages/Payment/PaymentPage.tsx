@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from "../../auth/useAuth";
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useAuth } from "@/auth/useAuth";
 import { IScreening, IBooking } from '@/types/types';
 import { fetchScreening } from '@/services/screening/fetchScreening.service';
-import { openBookingCheckout } from '@/services/booking/openBookingCheckout.service';
+import { startBookingCheckout } from '@/services/booking/startBookingCheckout.service';
+import { getBookingData } from '@/services/booking/getBookingData';
 import Container from "@/components/layout/Container";
 import Nav from "@/components/layout/Nav";
 import AuthModal from "@/components/auth/AuthModal";
@@ -18,33 +19,47 @@ const Payment = () => {
   const navigate = useNavigate();
 
   const { isLoggedIn } = useAuth();
-  const [loading, setLoading] = useState<boolean>(true);
   const [screeningData, setScreeningData] = useState<IScreening | null>(null);
+  const [bookingData, setBookingData] = useState<IBooking | null>(null);
+  const [searchParams] = useSearchParams();
 
-  const bookingDataString: string | null = localStorage.getItem('bookingData');
-  let bookingData: IBooking
+  const bookingId = searchParams.get("bookingid") ? searchParams.get("bookingid") : null;
 
-  if (bookingDataString !== null) {
-    bookingData = JSON.parse(bookingDataString);
-  } else {
-    navigate('/');
-  }
+  console.log(bookingId)
+
+  useEffect(() => {
+    const fetchBookingData = async () => {
+      if(bookingId){
+        try {
+          const bookingData = await getBookingData(bookingId);
+          setBookingData(bookingData);
+        } catch (error: any) {
+          navigate('/');
+        }
+      } else {
+        navigate('/');
+      }
+    };
+  
+    fetchBookingData();
+  }, [bookingId, navigate]);
 
   useEffect(() => {
     const fetchScreeningData = async () => {
-      try {
-        const screeningData = await fetchScreening(bookingData.screening_id);
-        setScreeningData(screeningData);
-        setLoading(false);
-      } catch (error: any) {
-        setLoading(false);
+      if(bookingData){
+        try {
+          const screeningData = await fetchScreening(bookingData.screening_id);
+          setScreeningData(screeningData);
+        } catch (error: any) {
+          navigate('/');
+        }
       }
     };
   
     fetchScreeningData();
-  }, []);
+  }, [bookingData, navigate]);
 
-  if (loading || !screeningData) return null;
+  if (!screeningData || !bookingId || !bookingData) return null;
 
   return (
     <>
@@ -72,7 +87,7 @@ const Payment = () => {
               booking={bookingData!}
               buttonLabel="Payer"
               disabled={!isLoggedIn}
-              buttonAction={async () => {await openBookingCheckout(bookingData)}}
+              buttonAction={async () => {await startBookingCheckout(bookingId)}}
             />
           </div>
         </div>
