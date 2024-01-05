@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { IScreening, IBooking, ITicket } from '@/types/types';
 import { fetchScreening } from '@/services/screening/fetchScreening.service';
+import { createBooking } from '@/services/booking/createBooking';
 import Container from "@/components/layout/Container"
 import Nav from "@/components/layout/Nav"
 import AuthModal from "@/components/auth/AuthModal";
@@ -12,6 +13,7 @@ import BookingSummary from '@/components/ui/BookingSummary';
 import AboutMovie from './AboutMovie';
 import TicketSelection from './TicketSelection';
 import SeatSelection from './SeatSelection';
+import Loading from '@/components/layout/Loading';
 
 const Screening = () => {
   const { id } = useParams();
@@ -63,16 +65,12 @@ const Screening = () => {
     })
   }
 
-  const saveBookingDataToLocalStorage = () => {
-    localStorage.setItem('bookingData', JSON.stringify(bookingData));
-  }
-
-  const goToPaymentPage = () => {
-    saveBookingDataToLocalStorage()
-    navigate('/payment');
+  const goToPaymentPage = async () => {
+    const bookingId = await createBooking(bookingData)
+    navigate(`/payment?bookingid=${bookingId}`);
   };
 
-  if (loading || !screeningData) return null;
+  if (loading || !screeningData) return <Loading />;
 
   return (
     <>

@@ -42,7 +42,7 @@ async function createCheckoutSession(items: ITicket[], bookingId: string, succes
     line_items: stripeItems,
     mode: 'payment',
     success_url: `${successUrl}?success=true&bookingid=${bookingId}`,
-    cancel_url: `${cancelUrl}?canceled=true`,
+    cancel_url: `${cancelUrl}`,
   });
 
   return session

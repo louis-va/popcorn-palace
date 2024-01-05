@@ -74,11 +74,12 @@ async function getOneScreening(req: Request, res: Response) {
     const screeningId = req.params.id
     const screening = await Screening.findById(screeningId)
 
-    // Get booked seats
-    const bookings = await Booking.find({ screening_id: screeningId }, 'seats payment_status')
+    // Get booked and locked seats
+    const bookings = await Booking.find({ screening_id: screeningId }, 'seats payment_status created_dt')
     if (bookings.length > 0) {
-      // set an array of seats that are booked and paid
-      screening!.bookedSeats = bookings.map(booking => (booking.payment_status) ? booking.seats : []).flat(1);
+      const bookedSeats = bookings.map(booking => (booking.payment_status) ? booking.seats : []).flat(1);
+      const lockedSeats = bookings.map(booking => (new Date(booking.created_dt) > new Date(Date.now() - 15 * 60 * 1000)) ? booking.seats : []).flat(1);
+      screening!.bookedSeats = [...bookedSeats, ...lockedSeats]
     } else {
       screening!.bookedSeats = []
     }

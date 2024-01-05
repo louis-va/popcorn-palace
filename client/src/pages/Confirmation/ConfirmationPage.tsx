@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { IScreening, IBooking } from '@/types/types';
 import { fetchScreening } from '@/services/screening/fetchScreening.service';
+import { getBookingData } from '@/services/booking/getBookingData';
 import Container from "@/components/layout/Container";
 import Nav from "@/components/layout/Nav";
 import AuthModal from "@/components/auth/AuthModal";
@@ -10,41 +11,49 @@ import BookingHeader from '@/components/ui/BookingHeader';
 import BookingSteps from '@/components/ui/BookingSteps';
 import BookingSummary from '@/components/ui/BookingSummary';
 import FeedbackMessage from './FeedbackMessage';
+import Loading from '@/components/layout/Loading';
 
 const Confirmation = () => {
   const navigate = useNavigate();
 
-  const [loading, setLoading] = useState<boolean>(true);
   const [screeningData, setScreeningData] = useState<IScreening | null>(null);
+  const [bookingData, setBookingData] = useState<IBooking | null>(null);
   const [searchParams] = useSearchParams();
 
   const bookingId = searchParams.get("bookingid") ? searchParams.get("bookingid") : null;
   const success = searchParams.get("success") ? searchParams.get("success") : null;
 
-  const bookingDataString: string | null = localStorage.getItem('bookingData');
-  let bookingData: IBooking
-
-  if (bookingDataString !== null) {
-    bookingData = JSON.parse(bookingDataString);
-  } else {
-    navigate('/');
-  }
-
   useEffect(() => {
     const fetchScreeningData = async () => {
-      try {
-        const screeningData = await fetchScreening(bookingData.screening_id);
-        setScreeningData(screeningData);
-        setLoading(false);
-      } catch (error: any) {
-        setLoading(false);
+      if(bookingId){
+        try {
+          const bookingData = await getBookingData(bookingId);
+          setBookingData(bookingData);
+        } catch (error: any) {
+          navigate('/');
+        }
       }
     };
   
     fetchScreeningData();
-  }, []);
+  }, [bookingId, navigate]);
 
-  if (loading || !screeningData) return null;
+  useEffect(() => {
+    const fetchScreeningData = async () => {
+      if(bookingData){
+        try {
+          const screeningData = await fetchScreening(bookingData.screening_id);
+          setScreeningData(screeningData);
+        } catch (error: any) {
+          navigate('/');
+        }
+      }
+    };
+  
+    fetchScreeningData();
+  }, [bookingData, navigate]);
+
+  if (!screeningData || !bookingId || !bookingData ) return <Loading />;
 
   return (
     <>
