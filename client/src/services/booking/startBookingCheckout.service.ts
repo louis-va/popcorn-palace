@@ -6,7 +6,7 @@ export const startBookingCheckout = async (bookingId: string) => {
     const payload = JSON.stringify({
       "booking_id": bookingId,
       "success_url": `${import.meta.env.VITE_URL}/payment/confirmation`,
-      "cancel_url": `${import.meta.env.VITE_URL}/payment`
+      "cancel_url": `${import.meta.env.VITE_URL}/payment?bookingid=${bookingId}`
     });
 
     const options = {

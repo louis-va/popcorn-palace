@@ -11,11 +11,8 @@ const PaymentInfo = () => {
           <Icon name="payment" className="w-6 h-6 ml-8"/>
         </div>
         
-        <Typography as="p" variant="p" className="text-white-muted mb-2">
-          Les paiements sont gérés et sécurisés par Stripe.
-        </Typography>
         <Typography as="p" variant="p" className="text-white-muted mb-4">
-          Car il s'agit d'un site web pour un faux cinéma, le paiement est fictif. Si vous souhaitez essayer le système de paiement, utilisez les informations suivantes :
+          Les paiements sont gérés par Stripe. Pour tester cette fonctionnalité, utilisez ces informations de test:
         </Typography>
 
         <div className="p-4 border-2 border-white/10 border-dashed rounded">

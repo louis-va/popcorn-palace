@@ -70,6 +70,7 @@ export interface IBooking {
   screening_id: string;
   tickets: ITicket[];
   seats: string[];
+  created_dt: Date
 }
 
 /* Form types */
