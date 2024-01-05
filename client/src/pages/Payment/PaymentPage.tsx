@@ -83,7 +83,10 @@ const Payment = () => {
 
           <div className="col-span-3 order-1 lg:col-span-1 lg:order-2">
             <BookingSteps step={2} />
-            <Countdown createdDate={bookingData.created_dt!} />
+            <Countdown 
+              createdDate={bookingData.created_dt!} 
+              timoutRedirectUrl={`/screenings/${screeningData.slug}`}
+            />
           </div>
 
           <div className="col-span-3 order-3 lg:col-span-1 lg:order-3 lg:sticky lg:top-4">
