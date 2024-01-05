@@ -6,9 +6,8 @@ import verifyBooking from '../middlewares/verifyBooking';
 
 const router = express.Router();
 
-router.post("/checkout",
+router.post("/create",
   [
-    auth.verifyToken,
     verifyScreening.checkScreeningId,
     verifyBooking.validateSeats,
     verifyBooking.checkSeatsDisponibility
@@ -16,10 +15,25 @@ router.post("/checkout",
   controller.createBooking
 );
 
-router.get("/status/:id",
+router.get("/:id",
+  [
+    verifyBooking.checkBookingId
+  ],
+  controller.getBooking
+);
+
+router.post("/checkout",
   [
     auth.verifyToken,
     verifyBooking.checkBookingId
+  ],
+  controller.checkout
+);
+
+router.get("/status/:id",
+  [
+    auth.verifyToken,
+    verifyBooking.checkStripeSessionId
   ],
   controller.validateBooking
 );
