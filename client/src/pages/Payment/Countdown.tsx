@@ -1,13 +1,16 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import Card from "@/components/common/Card";
 import Typography from "@/components/common/Typography"
 import Icon from "@/components/common/Icon";
 
 interface PaymentInfoProps {
-  createdDate: Date
+  createdDate: Date;
+  timoutRedirectUrl: string;
 }
 
-const Countdown = ({ createdDate }: PaymentInfoProps) => {
+const Countdown = ({ createdDate, timoutRedirectUrl }: PaymentInfoProps) => {
+  const navigate = useNavigate();
   const [countdown, setCountdown] = useState(15 * 60  * 1000);
   
   useEffect(() => {
@@ -19,6 +22,7 @@ const Countdown = ({ createdDate }: PaymentInfoProps) => {
       if (remainingTime <= 0) {
         clearInterval(intervalId); // Clear the interval when countdown finishes
         setCountdown(0);
+        navigate(timoutRedirectUrl);
       } else {
         setCountdown(remainingTime);
       }
@@ -28,7 +32,7 @@ const Countdown = ({ createdDate }: PaymentInfoProps) => {
     return () => {
       clearInterval(intervalId);
     };
-  }, [createdDate]);
+  }, [createdDate, navigate, timoutRedirectUrl]);
 
   // Format time to minutes and seconds
   const minutes = Math.floor(countdown / (60 * 1000));
