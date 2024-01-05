@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Typography from "@/components/common/Typography"
 import Card from "@/components/common/Card"
 import Pill from "@/components/common/Pill"
+import Icon from '@/components/common/Icon';
 import { IScreeningItem } from '@/types/types';
 import { fetchScreenings } from '@/services/screening/fetchScreenings.service';
 import { formatDateToDDMM, formatTimeToHHMM } from "@/utils/date.helpers";
@@ -63,7 +64,9 @@ const ScreeningGrid = () => {
     <section className="mt-12">
       <Typography as="h2" variant="h2">Nos prochaines projections</Typography>
       { loading ? (
-        <div className="mt-6">Chargement...</div>
+        <div className="mt-6">
+          <Icon name='spinner' className='w-8 h-8 animate-spin opacity-75'/>
+        </div>
       ) : error ? (
         <div className="mt-6">Une erreur s'est produite lors du chargement des séances.</div>
       ) : (

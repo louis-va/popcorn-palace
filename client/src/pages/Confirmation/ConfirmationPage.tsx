@@ -11,6 +11,7 @@ import BookingHeader from '@/components/ui/BookingHeader';
 import BookingSteps from '@/components/ui/BookingSteps';
 import BookingSummary from '@/components/ui/BookingSummary';
 import FeedbackMessage from './FeedbackMessage';
+import Loading from '@/components/layout/Loading';
 
 const Confirmation = () => {
   const navigate = useNavigate();
@@ -52,7 +53,7 @@ const Confirmation = () => {
     fetchScreeningData();
   }, [bookingData, navigate]);
 
-  if (!screeningData || !bookingId || !bookingData ) return null;
+  if (!screeningData || !bookingId || !bookingData ) return <Loading />;
 
   return (
     <>

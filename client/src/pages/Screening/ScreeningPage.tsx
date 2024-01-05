@@ -13,6 +13,7 @@ import BookingSummary from '@/components/ui/BookingSummary';
 import AboutMovie from './AboutMovie';
 import TicketSelection from './TicketSelection';
 import SeatSelection from './SeatSelection';
+import Loading from '@/components/layout/Loading';
 
 const Screening = () => {
   const { id } = useParams();
@@ -69,7 +70,7 @@ const Screening = () => {
     navigate(`/payment?bookingid=${bookingId}`);
   };
 
-  if (loading || !screeningData) return null;
+  if (loading || !screeningData) return <Loading />;
 
   return (
     <>

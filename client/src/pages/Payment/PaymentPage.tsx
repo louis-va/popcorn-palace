@@ -15,6 +15,7 @@ import BookingSummary from '@/components/ui/BookingSummary';
 import LoginStatus from './LoginStatus';
 import PaymentInfo from './PaymentInfo';
 import Countdown from './Countdown';
+import Loading from '@/components/layout/Loading';
 
 const Payment = () => {
   const navigate = useNavigate();
@@ -60,7 +61,7 @@ const Payment = () => {
     fetchScreeningData();
   }, [bookingData, navigate]);
 
-  if (!screeningData || !bookingId || !bookingData) return null;
+  if (!screeningData || !bookingId || !bookingData) return <Loading />;
 
   return (
     <>
@@ -82,7 +83,7 @@ const Payment = () => {
 
           <div className="col-span-3 order-1 lg:col-span-1 lg:order-2">
             <BookingSteps step={2} />
-            <Countdown createdDate={bookingData.created_dt} />
+            <Countdown createdDate={bookingData.created_dt!} />
           </div>
 
           <div className="col-span-3 order-3 lg:col-span-1 lg:order-3 lg:sticky lg:top-4">
