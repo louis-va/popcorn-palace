@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { AuthenticatedRequest } from '../interfaces/AuthenticatedRequest';
 import { createCheckoutSession, checkPaymentStatus } from '../services/stripe.services';
-// import { sendConfirmationEmail } from '../services/emailService'
+import { sendConfirmationEmail } from '../services/email.services'
 import database from '../models';
 const Booking = database.booking;
 
@@ -18,7 +18,7 @@ async function createBooking(req: Request, res: Response) {
     });
 
     const savedBooking = await booking.save();
-    savedBooking.qr_code = `https://api.qrserver.com/v1/create-qr-code/?data=${savedBooking._id}&size=200x200&bgcolor=F4F4F4`;
+    savedBooking.qr_code = `https://api.qrserver.com/v1/create-qr-code/?data=${savedBooking._id}&size=200x200&bgcolor=161616&color=ffffff`;
     await savedBooking.save();
 
     res.status(200).json({booking_id: savedBooking._id.toString()})
@@ -66,11 +66,11 @@ async function validateBooking(req: AuthenticatedRequest, res: Response) {
     
     let emailSent = false
     
-    if (isPaymentValid) {
+    if (isPaymentValid && booking && booking.payment_status == false) {
       await Booking.findOneAndUpdate({ _id: bookingId }, { $set: { payment_status: true } });
 
       try {
-        emailSent = true // const emailSent = await sendConfirmationEmail(booking)
+        emailSent = await sendConfirmationEmail(booking)
       } catch (err: any) {
         throw new Error(err)
       }

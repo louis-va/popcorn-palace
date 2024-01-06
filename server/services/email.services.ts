@@ -6,6 +6,7 @@ import { confirmationEmail } from "../templates/confirmationEmail";
 import database from '../models';
 const Screening = database.screening;
 const User = database.user;
+import { formatDateToDDMM, formatTimeToHHMM } from "../utils/date.helpers";
 
 // ENV variables
 dotenv.config();
@@ -21,22 +22,19 @@ async function sendConfirmationEmail(booking: IBooking) {
 
     if(!user || !screening) return false;
 
-    const day = screening.date.getDay();
-    const month = screening.date.getMonth() + 1;
-    const time = screening.date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
     const emailData = {
       firstname: user.firstname,
       movieTitle: screening.movie.title, 
       moviePoster: screening.movie.backdrop,
-      date: day + "/" + month, 
-      time: time, 
-      tickets: booking.tickets.length,
-      qrCode: booking.qr_code
+      date: formatDateToDDMM(screening.date), 
+      time: formatTimeToHHMM(screening.date), 
+      tickets: booking.seats.length,
+      qrCode: booking.qr_code,
+      seats: booking.seats.join(', ')
     }
 
     const data = await resend.emails.send({
-      from: "Brussels Rooftop Movies <no-reply@brm.lou-va.com>",
+      from: "Popcorn Palace <no-reply@popcorn-palace.lou-va.com>",
       to: [user.email],
       subject: `Votre ticket pour ${screening.movie.title}`,
       html: confirmationEmail(emailData),

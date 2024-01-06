@@ -6,6 +6,7 @@ interface IconfirmationEmail {
   time: string;
   tickets: number;
   qrCode: string;
+  seats: string;
 }
 
 export const confirmationEmail = ({
@@ -15,6 +16,7 @@ export const confirmationEmail = ({
   date, 
   time, 
   tickets,
+  seats,
   qrCode}: IconfirmationEmail) => { return `
   <!doctype html>
   <html>
@@ -31,23 +33,14 @@ export const confirmationEmail = ({
           }
         
           .wrapper {
-            padding: 8px !important;
-          }
-        
-          .content {
-            padding: 0 !important;
+            padding: 16px !important;
+            padding-top: 20px !important;
           }
         
           .container {
-            padding: 0 !important;
-            padding-top: 8px !important;
+            padding: 0px !important;
+            padding-top: 10px !important;
             width: 100% !important;
-          }
-        
-          .main {
-            border-left-width: 0 !important;
-            border-radius: 0 !important;
-            border-right-width: 0 !important;
           }
         }
         @media all {
@@ -87,36 +80,28 @@ export const confirmationEmail = ({
     <body style="font-family: Helvetica, sans-serif; -webkit-font-smoothing: antialiased; font-size: 16px; line-height: 1.3; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; background-color: #000; margin: 0; padding: 0;">
       <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #000; width: 100%;" width="100%" bgcolor="#f4f5f6">
         <tr>
-          <td style="font-family: Helvetica, sans-serif; font-size: 16px; vertical-align: top;" valign="top">&nbsp;</td>
-          <td class="container" style="font-family: Helvetica, sans-serif; font-size: 16px; vertical-align: top; max-width: 600px; padding: 0; padding-top: 24px; width: 600px; margin: 0 auto;" width="600" valign="top">
+          <td class="container" style="font-family: Helvetica, sans-serif; font-size: 16px; vertical-align: top; max-width: 600px; padding: 0; padding-top: 24px; width: 60%; margin: 0 auto;" width="600" valign="top">
             <div class="content" style="box-sizing: border-box; display: block; margin: 0 auto; max-width: 600px; padding: 0;">
   
               <!-- START CENTERED WHITE CONTAINER -->
               <span class="preheader" style="color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;">Récapitulatif de votre réservation.</span>
-              <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="main" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; background: #171717; border-radius: 16px; width: 100%;" width="100%">
+              <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="main" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-radius: 16px; width: 100%;" width="100%">
                 <!-- START MAIN CONTENT AREA -->
                 <tr>
                   <td class="wrapper" style="font-family: Helvetica, sans-serif; font-size: 16px; vertical-align: top; box-sizing: border-box; padding: 24px;" valign="top">
-                    <svg style="margin-bottom: 16px;" width="71" height="17" viewBox="0 0 71 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <g clip-path="url(#clip0_712_740)">
-                      <path d="M8.31607 16.9999C12.9109 16.9999 16.6321 13.2967 16.6321 8.73529C16.6321 4.17384 12.9109 0.46582 8.31607 0.46582C3.72126 0.46582 0 4.16403 0 8.73039C0 13.2967 3.72619 16.995 8.31607 16.995" fill="#FC4B20"/>
-                      <path d="M16.6374 16.9999C21.2322 16.9999 24.9534 13.2967 24.9534 8.73529C24.9534 4.17384 21.2322 0.46582 16.6374 0.46582C12.0425 0.46582 8.32129 4.16894 8.32129 8.73529C8.32129 13.3017 12.0475 16.9999 16.6374 16.9999Z" fill="#111111"/>
-                      <path d="M25.4518 16.9999C30.0466 16.9999 33.7728 13.2967 33.7728 8.73529C33.7728 4.17384 30.0417 0.46582 25.4518 0.46582C20.8619 0.46582 17.1357 4.16894 17.1357 8.73529C17.1357 13.3017 20.8619 16.9999 25.4518 16.9999Z" fill="#FC4B20"/>
-                      <path d="M38.8164 17V0H42.7252C43.5247 0 44.0923 0.0392383 44.418 0.11281C46.2244 0.529717 47.1226 1.8393 47.1226 4.04645C47.1226 5.9397 46.2145 7.21985 44.4032 7.89671C46.4563 8.34305 47.4878 9.73601 47.4878 12.0707C47.4878 13.0026 47.325 13.8413 46.9943 14.5917C46.6636 15.3422 46.1997 15.9308 45.5976 16.3526C45.0892 16.7106 44.5069 16.9166 43.8554 16.9755C43.5988 16.9902 43.2977 17 42.9522 17H38.8164ZM41.901 6.65089C42.587 6.64108 43.0559 6.5577 43.3026 6.40075C43.811 6.09175 44.0676 5.47375 44.0676 4.54674C44.0676 3.75216 43.9294 3.1783 43.6531 2.83006C43.4013 2.53087 42.9769 2.38373 42.3748 2.38373C42.2514 2.38373 42.0885 2.39354 41.901 2.40825V6.65089ZM41.901 14.3956C42.2366 14.4054 42.4587 14.4103 42.5771 14.4103C43.12 14.4103 43.5001 14.2631 43.7172 13.9737C44.0578 13.5176 44.2305 12.7917 44.2305 11.796C44.2305 10.5355 43.9196 9.76053 43.3026 9.48096C43.0608 9.37305 42.592 9.3191 41.901 9.3191V14.4005V14.3956Z" fill="#FC4B20"/>
-                      <path d="M49.1953 17V0H52.9906C56.322 0 57.9901 1.54501 57.9901 4.63503C57.9901 6.62147 57.3584 8.04876 56.0999 8.91691L57.9309 17H54.8117L53.2966 9.56434H52.4428V17H49.1953ZM52.4428 7.31304H52.882C53.5088 7.31304 53.953 7.18061 54.2096 6.91575C54.6193 6.49885 54.8216 5.79256 54.8216 4.78707C54.8216 3.85516 54.6045 3.20283 54.1701 2.82025C53.8938 2.58973 53.4743 2.47201 52.9067 2.47201H52.4428V7.30814V7.31304Z" fill="#FC4B20"/>
-                      <path d="M59.5449 17V0H63.7795L65.2847 8.8041L66.7653 0H70.9999V17H68.093V4.06117L65.8474 17H64.0805L62.0274 4.06117V17H59.5449Z" fill="#FC4B20"/>
-                      </g>
-                      <defs>
-                      <clipPath id="clip0_712_740">
-                      <rect width="71" height="17" fill="white"/>
-                      </clipPath>
-                      </defs>
+                    <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M23.7343 18.48C23.2489 18.8053 22.6409 18.9627 21.9102 18.952C21.1796 18.9413 20.5716 18.7733 20.0863 18.448C19.6009 18.1227 19.2356 17.6667 18.9902 17.08C18.7503 16.4933 18.6302 15.8 18.6302 15C18.6302 14.2 18.7503 13.5013 18.9902 12.904C19.2356 12.3067 19.6009 11.8453 20.0863 11.52C20.5716 11.1947 21.1796 11.0373 21.9102 11.048C22.6409 11.0587 23.2489 11.2267 23.7343 11.552C24.2196 11.8773 24.5823 12.3333 24.8223 12.92C25.0676 13.5067 25.1902 14.2 25.1902 15C25.1902 15.8 25.0676 16.4987 24.8223 17.096C24.5823 17.6933 24.2196 18.1547 23.7343 18.48Z" fill="#FF6422"/>
+                      <path d="M8.768 14.824H6.176V11.272H8.768C8.88 11.272 9.00267 11.2773 9.136 11.288C9.26933 11.2987 9.392 11.32 9.504 11.352C9.79733 11.432 10.024 11.568 10.184 11.76C10.344 11.9467 10.4533 12.1573 10.512 12.392C10.576 12.6213 10.608 12.84 10.608 13.048C10.608 13.256 10.576 13.4773 10.512 13.712C10.4533 13.9413 10.344 14.152 10.184 14.344C10.024 14.5307 9.79733 14.664 9.504 14.744C9.392 14.776 9.26933 14.7973 9.136 14.808C9.00267 14.8187 8.88 14.824 8.768 14.824Z" fill="#FF6422"/>
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M3 0C1.34315 0 0 1.34315 0 3V32C0 33.6569 1.34315 35 3 35H4V24.24H8.864C8.976 24.24 9.12534 24.2453 9.312 24.256C9.504 24.2613 9.67467 24.2773 9.824 24.304C10.512 24.4107 11.0747 24.6373 11.512 24.984C11.9547 25.3307 12.28 25.768 12.488 26.296C12.696 26.8187 12.8 27.4027 12.8 28.048C12.8 28.6933 12.6933 29.28 12.48 29.808C12.272 30.3307 11.9467 30.7653 11.504 31.112C11.0667 31.4587 10.5067 31.6853 9.824 31.792C9.67467 31.8133 9.504 31.8293 9.312 31.84C9.12 31.8507 8.97066 31.856 8.864 31.856H6.176V35H16.4322L19.72 24.24H22.968L26.2558 35H32C33.6569 35 35 33.6569 35 32V3C35 1.34315 33.6569 0 32 0H3ZM18.9262 20.248C19.7636 20.7493 20.7582 21 21.9102 21C23.0622 21 24.0543 20.7493 24.8862 20.248C25.7236 19.7467 26.3662 19.0453 26.8142 18.144C27.2676 17.2427 27.4942 16.1947 27.4942 15C27.4942 13.8053 27.2676 12.7573 26.8142 11.856C26.3662 10.9547 25.7236 10.2533 24.8862 9.752C24.0543 9.25067 23.0622 9 21.9102 9C20.7582 9 19.7636 9.25067 18.9262 9.752C18.0942 10.2533 17.4516 10.9547 16.9982 11.856C16.5502 12.7573 16.3262 13.8053 16.3262 15C16.3262 16.1947 16.5502 17.2427 16.9982 18.144C17.4516 19.0453 18.0942 19.7467 18.9262 20.248ZM4 9.24V20.76H6.176V16.856H8.864C8.97066 16.856 9.12 16.8507 9.312 16.84C9.504 16.8293 9.67467 16.8133 9.824 16.792C10.5067 16.6853 11.0667 16.4587 11.504 16.112C11.9467 15.7653 12.272 15.3307 12.48 14.808C12.6933 14.28 12.8 13.6933 12.8 13.048C12.8 12.4027 12.696 11.8187 12.488 11.296C12.28 10.768 11.9547 10.3307 11.512 9.984C11.0747 9.63733 10.512 9.41067 9.824 9.304C9.67467 9.27733 9.504 9.26133 9.312 9.256C9.12534 9.24533 8.976 9.24 8.864 9.24H4Z" fill="#FF6422"/>
+                      <path d="M24.0134 35L23.5072 33.36H19.1694L18.671 35H24.0134Z" fill="#FF6422"/>
+                      <path d="M6.176 29.824H8.768C8.88 29.824 9.00267 29.8187 9.136 29.808C9.26933 29.7973 9.392 29.776 9.504 29.744C9.79733 29.664 10.024 29.5307 10.184 29.344C10.344 29.152 10.4533 28.9413 10.512 28.712C10.576 28.4773 10.608 28.256 10.608 28.048C10.608 27.84 10.576 27.6213 10.512 27.392C10.4533 27.1573 10.344 26.9467 10.184 26.76C10.024 26.568 9.79733 26.432 9.504 26.352C9.392 26.32 9.26933 26.2987 9.136 26.288C9.00267 26.2773 8.88 26.272 8.768 26.272H6.176V29.824Z" fill="#FF6422"/>
+                      <path d="M22.88 31.328L21.3216 26.2791L19.787 31.328H22.88Z" fill="#FF6422"/>
                     </svg>                      
-                    <p style="color: #F4F4F4; font-family: Helvetica, sans-serif; font-size: 16px; font-weight: normal; margin: 0; margin-bottom: 16px;">
+                    <p style="color: #F4F4F4; font-family: Helvetica, sans-serif; font-size: 16px; font-weight: normal; margin: 0; margin-bottom: 16px; margin-top: 16px;">
                       Bonjour ${firstname},
                     </p>
                     <p style="color: #F4F4F4; font-family: Helvetica, sans-serif; font-size: 16px; font-weight: normal; margin: 0; margin-bottom: 8px;">
-                      Merci d’avoir réservé une séance de cinéma chez Brussels Rooftop Movies pour le film ${movieTitle} le ${date} à ${time}.
+                      Merci d’avoir réservé une séance de cinéma chez Popcorn Palace pour le film ${movieTitle} le ${date} à ${time}.
                     </p>
                     <p style="color: #F4F4F4; font-family: Helvetica, sans-serif; font-size: 16px; font-weight: normal; margin: 0; margin-bottom: 24px;">
                       Retrouvez ci-dessous votre ticket. Ne l'oubliez pas le jour de la séance!
@@ -130,24 +115,27 @@ export const confirmationEmail = ({
                             <table role="presentation" border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: auto;">
                               <tbody>
                                 <tr>
-                                  <td style="vertical-align: top; border-radius: 15px; text-align: center; width: 100%" valign="top" align="center" width="100%">
-                                    <img src="${moviePoster}" alt="Akira" style="border-radius: 15px; width: 100%; max-width: 100%">
-                                  </td>
-                                </tr>
-
-                                <tr>
-                                  <td style="font-family: Helvetica, sans-serif; font-size: 16px; vertical-align: top; border-radius: 15px; padding: 30px;" valign="top" align="left" bgcolor="#F4F4F4" width="65%">
+                                  <td style="font-family: Helvetica, sans-serif; font-size: 16px; vertical-align: top; border-radius: 8px; padding: 12px; border: 1px #232323 solid" valign="top" align="left" bgcolor="#161616" width="65%">
                                     <table width="100%">
+                                      <tr>
+                                        <td style="vertical-align: top; border-radius: 15px; text-align: center; width: 100%" valign="top" align="center" width="100%">
+                                          <img src="${moviePoster}" alt="${movieTitle}" style="border-radius: 5px; width: 100%; max-width: 100%; margin-bottom: 8px;">
+                                        </td>
+                                      </tr>
                                       <tr width="100%">
-                                        <td width="50%">Film: <b>${movieTitle}</b></td>
-                                        <td width="50%">Date: <b>${date}</b></td>
+                                        <td style="color: #ffffff">Film: <b>${movieTitle}</b></td>
+                                      </tr>
+                                      <tr width="100%">
+                                        <td style="color: #ffffff">Date: <b>${date}</b> Heure: <b>${time}</b></td>
                                       </tr>
                                       <tr>
-                                        <td width="50%">Entrées: <b>${tickets}</b></td>
-                                        <td width="50%">Heure: <b>${time}</b></td>
+                                        <td style="color: #ffffff">Entrées: <b>${tickets}</b></td>
+                                      </tr>
+                                      <tr>
+                                        <td style="color: #ffffff">Places: <b>${seats}</b></td>
                                       </tr>
                                     </table>
-                                    <img style="padding-top: 20px; width: auto;" src="${qrCode}" alt="Akira">
+                                    <img style="padding-top: 20px; padding-left: 5px; width: 150px;" src="${qrCode}" alt="QR Code">
                                   </td>
                                 </tr>
                               </tbody>
@@ -162,25 +150,9 @@ export const confirmationEmail = ({
                 </tr>
                 <!-- END MAIN CONTENT AREA -->
               </table>
-  
-              <!-- START FOOTER -->
-              <div class="footer" style="clear: both; padding-top: 24px; text-align: center; width: 100%;">
-                <table role="presentation" border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;" width="100%">
-                  <tr>
-                    <td class="content-block" style="font-family: Helvetica, sans-serif; vertical-align: top; color: #575757; font-size: 16px; text-align: center; padding-bottom: 32px" valign="top" align="center">
-                      Copyright Brussels Rooftop Movies. <br/>
-                      Av. Adolphe Buyl 345, 1050 Ixelles, Bruxelles, BE. <br/>
-                      info@br.movies <br/>
-                    </td>
-                  </tr>
-                </table>
-              </div>
-  
-              <!-- END FOOTER -->
-              
+
               <!-- END CENTERED WHITE CONTAINER --></div>
           </td>
-          <td style="font-family: Helvetica, sans-serif; font-size: 16px; vertical-align: top;" valign="top">&nbsp;</td>
         </tr>
       </table>
     </body>
