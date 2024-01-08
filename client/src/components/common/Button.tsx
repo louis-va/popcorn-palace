@@ -45,7 +45,7 @@ const Button = ({ type="button", variant, size, disabled, loading, onClick, chil
       type={type} 
       disabled={isDisabled} 
       onClick={onClick} 
-      className={`rounded-full inline-flex justify-center items-center active:scale-[.97] ${className}`}
+      className={`rounded-full inline-flex justify-center items-center active:scale-[.97] transition-all duration-100 ${className}`}
     >
       {(loading) ? 
         <Icon 

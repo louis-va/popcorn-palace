@@ -24,3 +24,28 @@ html {
     font-size: 16px;
   }
 }
+
+/* ANIMATIONS */
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px)
+  }
+  50% {
+    transform: translateY(-20px)
+  }
+  100% {
+    transform: translateY(0px)
+  }
+}

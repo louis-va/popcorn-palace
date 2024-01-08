@@ -18,7 +18,7 @@ interface ScreeningCardProps {
 const ScreeningCard = ({ path, title, poster, date, className='' }: ScreeningCardProps) => {
   return (
     <a href={`/screenings/${path}`} className={`${className} rounded-lg`}>
-      <Card size="medium" className="flex flex-col justify-between h-full hover:bg-white/10 hover:border-white/10">
+      <Card size="medium" className="flex flex-col justify-between h-full backdrop-blur hover:border-white/15 transition-all duration-100">
         <img 
           className="w-full rounded"
           src={poster}
@@ -61,16 +61,16 @@ const ScreeningGrid = () => {
   }, []);
 
   return (
-    <section className="mt-12">
+    <section className="mt-16">
       <Typography as="h2" variant="h2">Nos prochaines projections</Typography>
       { loading ? (
-        <div className="mt-6">
+        <div className="mt-8">
           <Icon name='spinner' className='w-8 h-8 animate-spin opacity-75'/>
         </div>
       ) : error ? (
-        <div className="mt-6">Une erreur s'est produite lors du chargement des séances.</div>
+        <div className="mt-8">Une erreur s'est produite lors du chargement des séances.</div>
       ) : (
-        <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+        <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           {screeningsData?.map((screening) => (
             <ScreeningCard
               key={screening._id}

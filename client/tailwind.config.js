@@ -11,7 +11,7 @@ export default {
     },
     colors: {
       'black': {
-        DEFAULT: 'rgb(10, 10, 10)'
+        DEFAULT: 'rgb(12, 13, 20)'
       },
       'white': {
         DEFAULT: 'rgb(255, 255, 255)',
