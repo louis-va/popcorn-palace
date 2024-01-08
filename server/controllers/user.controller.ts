@@ -7,7 +7,7 @@ const Booking = database.booking;
 // Get one screening
 async function getTickets(req: AuthenticatedRequest, res: Response) {
   try {
-    const tickets = await Booking.find({ user_id: req.userId })
+    const tickets = await Booking.find({ user_id: req.userId }).populate('screening_id')
 
     res.status(200).send(tickets);
   } catch (err: any) {
