@@ -8,7 +8,7 @@ const Nav = () => {
   const { setIsAuthModalOpen, isLoggedIn, userData } = useAuth();
 
   const loggedInButton = (
-    <Button variant="tertiary" size="small" className="backdrop-blur-sm" onClick={() => { navigate('/profile'); }}>
+    <Button variant="tertiary" size="small" className="backdrop-blur-sm" onClick={() => { navigate('/profile') }}>
       <span className="inline-block w-3 h-3 mr-2 rounded-full bg-orange"></span>
       {`${userData?.firstname} ${userData?.lastname}`}
     </Button>

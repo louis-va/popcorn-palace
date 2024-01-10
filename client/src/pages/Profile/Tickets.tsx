@@ -31,6 +31,14 @@ const TicketHoles = () => {
       <div className="w-3 h-3 bg-black border border-white/10 rounded-full"></div>
       <div className="w-3 h-3 bg-black border border-white/10 rounded-full"></div>
       <div className="w-3 h-3 bg-black border border-white/10 rounded-full"></div>
+      <div className="w-3 h-3 bg-black border border-white/10 rounded-full"></div>
+      <div className="w-3 h-3 bg-black border border-white/10 rounded-full"></div>
+      <div className="w-3 h-3 bg-black border border-white/10 rounded-full"></div>
+      <div className="w-3 h-3 bg-black border border-white/10 rounded-full"></div>
+      <div className="w-3 h-3 bg-black border border-white/10 rounded-full"></div>
+      <div className="w-3 h-3 bg-black border border-white/10 rounded-full"></div>
+      <div className="w-3 h-3 bg-black border border-white/10 rounded-full"></div>
+      <div className="w-3 h-3 bg-black border border-white/10 rounded-full"></div>
     </div>
   )
 }

@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import { useAuth } from "../../auth/useAuth";
 import Card from "@/components/common/Card";
@@ -11,6 +12,7 @@ interface FeedbackMessageProps {
 }
 
 const FeedbackMessage = ({ bookingId, success }: FeedbackMessageProps) => {
+  const navigate = useNavigate();
   const { isLoggedIn } = useAuth();
   const [validatePaymentResponse, setValidatePaymentResponse] = useState<any>(null)
 
@@ -62,7 +64,7 @@ const FeedbackMessage = ({ bookingId, success }: FeedbackMessageProps) => {
           'Vous pouvez retrouver vos tickets dans votre espace personnel.'
         )}
         </Typography>
-        <Button type="button" variant="secondary" size="small">Voir mes tickets</Button>
+        <Button type="button" variant="secondary" size="small" onClick={() => navigate('/profile') }>Voir mes tickets</Button>
       </Card>
     )
   } else {
