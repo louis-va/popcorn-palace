@@ -1,6 +1,33 @@
 # Popcorn Palace
 
-A website for the fictionnal cinema Popcorn Palace.
+A fullstack cinema booking app.
+
+[View demo](https://popa.lou-va.com/)
+
+![Some screenshots showing the different pages of the application](screenshots.jpg)
+
+## About
+
+Front-end and back-end apps to manage a small cinema. 
+
+Notable features :
+- Tickets added to the user account
+- Easily add movies by fetching all the data from TMDB
+- Ticket type and seat selection
+- 15 minutes lock on the selected seats
+- Payment with Stripe
+- Confirmation email
+
+## Built with
+
+- [React](https://react.dev/)
+- [Tailwind](https://tailwindcss.com/)
+- [Express](https://expressjs.com/)
+- [JWT](https://jwt.io/)
+- [MongoDB](https://www.mongodb.com/fr-fr)
+- [Resend](https://resend.com/)
+- [Stripe](https://stripe.com/)
+- [TMDB](https://www.themoviedb.org/)
 
 ## Getting Started
 
