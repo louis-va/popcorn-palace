@@ -8,9 +8,6 @@ export const logout = async () => {
       credentials: 'include' as RequestCredentials,
       headers: headers
     }
-
-    // Simulating a 2 seconds delay
-    await new Promise(resolve => setTimeout(resolve, 2000));
     
     const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/signout`, options)
 

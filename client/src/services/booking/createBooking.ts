@@ -40,9 +40,6 @@ export const createBooking = async (data: IBooking) => {
       headers: headers,
       body: payload
     }
-
-    // Simulating a 1 seconds delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
     
     const response = await fetch(`${import.meta.env.VITE_API_URL}/bookings/create`, options);
     const body = await response.json();

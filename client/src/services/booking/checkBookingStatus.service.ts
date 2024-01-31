@@ -8,9 +8,6 @@ export const checkBookingStatus = async (bookingId: string) => {
       credentials: 'include' as RequestCredentials,
       headers: headers
     }
-
-    // Simulating a 1 seconds delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
     
     const response = await fetch(`${import.meta.env.VITE_API_URL}/bookings/status/${bookingId}`, options);
 
