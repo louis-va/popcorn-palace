@@ -5,7 +5,7 @@ services:
     image: node:21
     working_dir: /app
     ports:
-      - "8002:8002"
+      - "8000:8000"
     volumes:
       - .:/app
     command: npm run start
